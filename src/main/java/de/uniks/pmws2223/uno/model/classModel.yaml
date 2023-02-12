@@ -1,4 +1,5 @@
 - c: 	org.fulib.classmodel.ClassModel
+  classes: 	card 	game 	player
   defaultCollectionType: 	c1
   defaultPropertyStyle: 	Bean
   defaultRoleType: 	"java.util.ArrayList<%s>"
@@ -6,10 +7,175 @@
   packageName: 	de.uniks.pmws2223.uno.model
   packageSrcFolder: 	"src/main/java/de/uniks/pmws2223/uno/model"
 
+- card: 	org.fulib.classmodel.Clazz
+  attributes: 	card_value 	card_color 	card_canPlayedAt 	card_canReceive
+  model: 	c
+  modified: 	false
+  name: 	Card
+  propertyStyle: 	Bean
+  roles: 	card_game 	card_player
+
+- game: 	org.fulib.classmodel.Clazz
+  attributes: 	game_direction
+  model: 	c
+  modified: 	false
+  name: 	Game
+  propertyStyle: 	Bean
+  roles: 	game_discardPile 	game_players 	game_currentPLayer
+
+- player: 	org.fulib.classmodel.Clazz
+  attributes: 	player_name
+  model: 	c
+  modified: 	false
+  name: 	Player
+  propertyStyle: 	Bean
+  roles: 	player_cards 	player_game 	player_Game_currentPLayer
+
 - c1: 	org.fulib.classmodel.CollectionType
   implClass: 	class java.util.ArrayList
   implTemplate: 	"java.util.ArrayList<%s>"
   itf: 	org.fulib.classmodel.CollectionInterface.List
   qualifiedImplName: 	java.util.ArrayList
   simpleImplName: 	ArrayList
+
+- card_value: 	org.fulib.classmodel.Attribute
+  clazz: 	card
+  id: 	Card_value
+  modified: 	false
+  name: 	value
+  propertyStyle: 	Bean
+  type: 	String
+  typeSignature: 	String
+
+- card_color: 	org.fulib.classmodel.Attribute
+  clazz: 	card
+  id: 	Card_color
+  modified: 	false
+  name: 	color
+  propertyStyle: 	Bean
+  type: 	String
+  typeSignature: 	String
+
+- card_canPlayedAt: 	org.fulib.classmodel.Attribute
+  clazz: 	card
+  collectionType: 	c1
+  id: 	Card_canPlayedAt
+  modified: 	false
+  name: 	canPlayedAt
+  propertyStyle: 	Bean
+  type: 	String
+  typeSignature: 	String
+
+- card_canReceive: 	org.fulib.classmodel.Attribute
+  clazz: 	card
+  collectionType: 	c1
+  id: 	Card_canReceive
+  modified: 	false
+  name: 	canReceive
+  propertyStyle: 	Bean
+  type: 	String
+  typeSignature: 	String
+
+- card_game: 	org.fulib.classmodel.AssocRole
+  aggregation: 	false
+  cardinality: 	1
+  clazz: 	card
+  id: 	Card_game
+  modified: 	false
+  name: 	game
+  other: 	game_discardPile
+  propertyStyle: 	Bean
+
+- card_player: 	org.fulib.classmodel.AssocRole
+  aggregation: 	false
+  cardinality: 	1
+  clazz: 	card
+  id: 	Card_player
+  modified: 	false
+  name: 	player
+  other: 	player_cards
+  propertyStyle: 	Bean
+
+- game_direction: 	org.fulib.classmodel.Attribute
+  clazz: 	game
+  id: 	Game_direction
+  modified: 	false
+  name: 	direction
+  propertyStyle: 	Bean
+  type: 	boolean
+  typeSignature: 	boolean
+
+- game_discardPile: 	org.fulib.classmodel.AssocRole
+  aggregation: 	false
+  cardinality: 	1
+  clazz: 	game
+  id: 	Game_discardPile
+  modified: 	false
+  name: 	discardPile
+  other: 	card_game
+  propertyStyle: 	Bean
+
+- game_players: 	org.fulib.classmodel.AssocRole
+  aggregation: 	false
+  cardinality: 	42
+  clazz: 	game
+  collectionType: 	c1
+  id: 	Game_players
+  modified: 	false
+  name: 	players
+  other: 	player_game
+  propertyStyle: 	Bean
+  roleType: 	"java.util.ArrayList<%s>"
+
+- game_currentPLayer: 	org.fulib.classmodel.AssocRole
+  aggregation: 	false
+  cardinality: 	1
+  clazz: 	game
+  id: 	Game_currentPLayer
+  modified: 	false
+  name: 	currentPLayer
+  other: 	player_Game_currentPLayer
+  propertyStyle: 	Bean
+
+- player_name: 	org.fulib.classmodel.Attribute
+  clazz: 	player
+  id: 	Player_name
+  modified: 	false
+  name: 	name
+  propertyStyle: 	Bean
+  type: 	String
+  typeSignature: 	String
+
+- player_cards: 	org.fulib.classmodel.AssocRole
+  aggregation: 	false
+  cardinality: 	42
+  clazz: 	player
+  collectionType: 	c1
+  id: 	Player_cards
+  modified: 	false
+  name: 	cards
+  other: 	card_player
+  propertyStyle: 	Bean
+  roleType: 	"java.util.ArrayList<%s>"
+
+- player_game: 	org.fulib.classmodel.AssocRole
+  aggregation: 	false
+  cardinality: 	1
+  clazz: 	player
+  id: 	Player_game
+  modified: 	false
+  name: 	game
+  other: 	game_players
+  propertyStyle: 	Bean
+
+- player_Game_currentPLayer: 	org.fulib.classmodel.AssocRole
+  aggregation: 	false
+  cardinality: 	0
+  clazz: 	player
+  collectionType: 	c1
+  id: 	Player_Game_currentPLayer
+  modified: 	false
+  other: 	game_currentPLayer
+  propertyStyle: 	Bean
+  roleType: 	"java.util.ArrayList<%s>"
 

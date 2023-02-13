@@ -10,18 +10,19 @@ import java.util.List;
 public class GenModel implements ClassModelDecorator {
 
     class Game {
-        boolean direction;
+        String direction;
 
         @Link("game")
         List<Player> players;
         @Link
-        Player currentPLayer;
+        Player currentPlayer;
         @Link("game")
         Card discardPile;
     }
 
     class Player {
         String name;
+        String type;
 
         @Link("player")
         List<Card> cards;

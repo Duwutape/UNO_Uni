@@ -23,6 +23,11 @@ public class Card
    private Game game;
    private Player player;
 
+   public Card(String value, String color) {
+      this.value = value;
+      this.color = color;
+   }
+
    public String getValue()
    {
       return this.value;

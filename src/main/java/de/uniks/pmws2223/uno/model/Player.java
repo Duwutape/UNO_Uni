@@ -12,10 +12,12 @@ public class Player
    public static final String PROPERTY_NAME = "name";
    public static final String PROPERTY_CARDS = "cards";
    public static final String PROPERTY_GAME = "game";
+   public static final String PROPERTY_TYPE = "type";
    private String name;
    protected PropertyChangeSupport listeners;
    private List<Card> cards;
    private Game game;
+   private String type;
 
    public String getName()
    {
@@ -128,6 +130,24 @@ public class Player
       return this;
    }
 
+   public String getType()
+   {
+      return this.type;
+   }
+
+   public Player setType(String value)
+   {
+      if (Objects.equals(value, this.type))
+      {
+         return this;
+      }
+
+      final String oldValue = this.type;
+      this.type = value;
+      this.firePropertyChange(PROPERTY_TYPE, oldValue, value);
+      return this;
+   }
+
    public boolean firePropertyChange(String propertyName, Object oldValue, Object newValue)
    {
       if (this.listeners != null)
@@ -152,6 +172,7 @@ public class Player
    {
       final StringBuilder result = new StringBuilder();
       result.append(' ').append(this.getName());
+      result.append(' ').append(this.getType());
       return result.substring(1);
    }
 

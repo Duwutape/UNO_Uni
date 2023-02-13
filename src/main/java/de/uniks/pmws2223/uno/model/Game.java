@@ -4,37 +4,20 @@ import java.util.List;
 import java.util.Collections;
 import java.util.Collection;
 import java.beans.PropertyChangeSupport;
+import java.util.Objects;
 
 @SuppressWarnings({"unused", "UnusedReturnValue"})
 public class Game
 {
-   public static final String PROPERTY_DIRECTION = "direction";
    public static final String PROPERTY_DISCARD_PILE = "discardPile";
    public static final String PROPERTY_PLAYERS = "players";
-   public static final String PROPERTY_CURRENT_PLAYER = "currentPLayer";
-   private boolean direction;
+   public static final String PROPERTY_DIRECTION = "direction";
+   public static final String PROPERTY_CURRENT_PLAYER = "currentPlayer";
    protected PropertyChangeSupport listeners;
    private Card discardPile;
    private List<Player> players;
-   private Player currentPLayer;
-
-   public boolean isDirection()
-   {
-      return this.direction;
-   }
-
-   public Game setDirection(boolean value)
-   {
-      if (value == this.direction)
-      {
-         return this;
-      }
-
-      final boolean oldValue = this.direction;
-      this.direction = value;
-      this.firePropertyChange(PROPERTY_DIRECTION, oldValue, value);
-      return this;
-   }
+   private String direction;
+   private Player currentPlayer;
 
    public Card getDiscardPile()
    {
@@ -129,20 +112,38 @@ public class Game
       return this;
    }
 
-   public Player getCurrentPLayer()
+   public String getDirection()
    {
-      return this.currentPLayer;
+      return this.direction;
    }
 
-   public Game setCurrentPLayer(Player value)
+   public Game setDirection(String value)
    {
-      if (this.currentPLayer == value)
+      if (Objects.equals(value, this.direction))
       {
          return this;
       }
 
-      final Player oldValue = this.currentPLayer;
-      this.currentPLayer = value;
+      final String oldValue = this.direction;
+      this.direction = value;
+      this.firePropertyChange(PROPERTY_DIRECTION, oldValue, value);
+      return this;
+   }
+
+   public Player getCurrentPlayer()
+   {
+      return this.currentPlayer;
+   }
+
+   public Game setCurrentPlayer(Player value)
+   {
+      if (this.currentPlayer == value)
+      {
+         return this;
+      }
+
+      final Player oldValue = this.currentPlayer;
+      this.currentPlayer = value;
       this.firePropertyChange(PROPERTY_CURRENT_PLAYER, oldValue, value);
       return this;
    }
@@ -170,6 +171,14 @@ public class Game
    {
       this.setDiscardPile(null);
       this.withoutPlayers(new ArrayList<>(this.getPlayers()));
-      this.setCurrentPLayer(null);
+      this.setCurrentPlayer(null);
+   }
+
+   @Override
+   public String toString()
+   {
+      final StringBuilder result = new StringBuilder();
+      result.append(' ').append(this.getDirection());
+      return result.substring(1);
    }
 }

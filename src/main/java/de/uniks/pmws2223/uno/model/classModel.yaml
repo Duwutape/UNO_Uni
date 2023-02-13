@@ -21,15 +21,15 @@
   modified: 	false
   name: 	Game
   propertyStyle: 	Bean
-  roles: 	game_discardPile 	game_players 	game_currentPLayer
+  roles: 	game_discardPile 	game_players 	game_currentPlayer
 
 - player: 	org.fulib.classmodel.Clazz
-  attributes: 	player_name
+  attributes: 	player_name 	player_type
   model: 	c
   modified: 	false
   name: 	Player
   propertyStyle: 	Bean
-  roles: 	player_cards 	player_game 	player_Game_currentPLayer
+  roles: 	player_cards 	player_game 	player_Game_currentPlayer
 
 - c1: 	org.fulib.classmodel.CollectionType
   implClass: 	class java.util.ArrayList
@@ -102,8 +102,8 @@
   modified: 	false
   name: 	direction
   propertyStyle: 	Bean
-  type: 	boolean
-  typeSignature: 	boolean
+  type: 	String
+  typeSignature: 	String
 
 - game_discardPile: 	org.fulib.classmodel.AssocRole
   aggregation: 	false
@@ -127,14 +127,14 @@
   propertyStyle: 	Bean
   roleType: 	"java.util.ArrayList<%s>"
 
-- game_currentPLayer: 	org.fulib.classmodel.AssocRole
+- game_currentPlayer: 	org.fulib.classmodel.AssocRole
   aggregation: 	false
   cardinality: 	1
   clazz: 	game
-  id: 	Game_currentPLayer
+  id: 	Game_currentPlayer
   modified: 	false
-  name: 	currentPLayer
-  other: 	player_Game_currentPLayer
+  name: 	currentPlayer
+  other: 	player_Game_currentPlayer
   propertyStyle: 	Bean
 
 - player_name: 	org.fulib.classmodel.Attribute
@@ -142,6 +142,15 @@
   id: 	Player_name
   modified: 	false
   name: 	name
+  propertyStyle: 	Bean
+  type: 	String
+  typeSignature: 	String
+
+- player_type: 	org.fulib.classmodel.Attribute
+  clazz: 	player
+  id: 	Player_type
+  modified: 	false
+  name: 	type
   propertyStyle: 	Bean
   type: 	String
   typeSignature: 	String
@@ -168,14 +177,14 @@
   other: 	game_players
   propertyStyle: 	Bean
 
-- player_Game_currentPLayer: 	org.fulib.classmodel.AssocRole
+- player_Game_currentPlayer: 	org.fulib.classmodel.AssocRole
   aggregation: 	false
   cardinality: 	0
   clazz: 	player
   collectionType: 	c1
-  id: 	Player_Game_currentPLayer
+  id: 	Player_Game_currentPlayer
   modified: 	false
-  other: 	game_currentPLayer
+  other: 	game_currentPlayer
   propertyStyle: 	Bean
   roleType: 	"java.util.ArrayList<%s>"
 

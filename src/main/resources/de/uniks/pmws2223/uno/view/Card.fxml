@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+
+<Pane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Pane fx:id="cardPane" prefHeight="100.0" prefWidth="66.0" style="-fx-border-color: black; -fx-border-radius: 10; -fx-background-color: aaa; -fx-background-radius: 10;" />
+      <Label fx:id="cardText" layoutY="40.0" prefHeight="20.0" prefWidth="66.0" text="UNO" textFill="#ec7b1a">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+   </children>
+</Pane>

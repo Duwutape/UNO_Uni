@@ -1,5 +1,6 @@
 package de.uniks.pmws2223.uno.service;
 
+import de.uniks.pmws2223.uno.controller.BotController;
 import de.uniks.pmws2223.uno.model.Card;
 import de.uniks.pmws2223.uno.model.Game;
 import de.uniks.pmws2223.uno.model.Player;
@@ -28,7 +29,8 @@ public class GameService {
                 case REVERSE -> game.setDirection(COUNTER_CLOCKWISE);
                 case SKIP -> skipPlayer();
                 case DRAW -> drawTwo();
-                default -> nextPlayer();
+                default -> {nextPlayer();
+                    endTurn();}
             }
         } else if (card.getColor().equals(BLACK)) {
             game.setDiscardPile(card);
@@ -36,11 +38,11 @@ public class GameService {
         }
     }
 
-    public Card drawCard(){
+    public Card drawCard() {
         return cardService.createCard();
     }
 
-    private void drawCard(Player player) {
+    public void drawCard(Player player) {
         player.withCards(drawCard());
     }
 
@@ -58,11 +60,20 @@ public class GameService {
     private void skipPlayer() {
         nextPlayer();
         nextPlayer();
+        endTurn();
     }
 
     private void drawTwo() {
         nextPlayer();
         game.getCurrentPlayer().withCards(drawCard(), drawCard());
         nextPlayer();
+        endTurn();
+    }
+
+    public void endTurn() {
+        if (game.getCurrentPlayer().getType().equals(BOT)) {
+            final BotService botService = new BotService(game, game.getCurrentPlayer());
+            botService.playWithDelay();
+        }
     }
 }

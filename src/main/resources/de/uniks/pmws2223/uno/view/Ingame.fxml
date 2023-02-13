@@ -47,13 +47,13 @@
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="760.0" prefWidth="920.0" VBox.vgrow="ALWAYS">
          <children>
             <HBox fx:id="botBox" prefWidth="920.0" spacing="10.0" />
-            <Button layoutX="724.0" layoutY="629.0" mnemonicParsing="false" text="Leave Game" />
+            <Button fx:id="leaveButton" layoutX="719.0" layoutY="618.0" mnemonicParsing="false" text="Leave Game" />
             <Pane layoutX="262.0" layoutY="305.0" prefHeight="150.0" prefWidth="100.0" style="-fx-border-color: black; -fx-border-radius: 10; -fx-background-radius: 10; -fx-background-color: aaa;" />
             <Button fx:id="drawPileButton" layoutX="559.0" layoutY="305.0" mnemonicParsing="false" prefHeight="150.0" prefWidth="100.0" style="-fx-background-radius: 10;" text="Draw Pile" />
-            <Label fx:id="namePlayerLabel" layoutX="-2.0" layoutY="641.0" text="Player" />
-            <ScrollPane fx:id="playerBox" layoutY="658.0">
+            <Label fx:id="namePlayerLabel" layoutY="629.0" text="Player" />
+            <ScrollPane fx:id="playerBox" layoutY="645.0" prefHeight="115.0" prefWidth="800.0">
                <content>
-                  <HBox fx:id="cardBoxPlayer" prefHeight="100.0" prefWidth="803.0" />
+                  <HBox fx:id="cardBoxPlayer" prefHeight="100.0" />
                </content>
             </ScrollPane>
             <Button fx:id="chooseColorRed" layoutX="820.0" layoutY="660.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: red; -fx-border-color: black; -fx-border-radius: 10; -fx-background-radius: 10;" />
@@ -65,7 +65,7 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <Button fx:id="skipTurnButton" layoutX="650.0" layoutY="629.0" mnemonicParsing="false" text="Skip turn" />
+            <Button fx:id="skipTurnButton" layoutX="648.0" layoutY="618.0" mnemonicParsing="false" text="Skip turn" />
          </children>
          <VBox.margin>
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />

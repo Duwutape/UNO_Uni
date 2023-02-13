@@ -7,6 +7,7 @@ import de.uniks.pmws2223.uno.model.Game;
 import de.uniks.pmws2223.uno.model.Player;
 import de.uniks.pmws2223.uno.service.CardService;
 import de.uniks.pmws2223.uno.service.GameService;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
@@ -37,6 +38,7 @@ public class IngameController implements Controller {
     private Button yellow;
     private Button green;
     private Button drawCardButton;
+    private Button skipTurnButton;
 
     public IngameController(App app, GameService gameService, CardService cardService, Game game) {
         this.app = app;
@@ -76,7 +78,7 @@ public class IngameController implements Controller {
         green = (Button) parent.lookup("#chooseColorGreen");
         Label discardValue = (Label) parent.lookup("#discardValueLabel");
         drawCardButton = (Button) parent.lookup("#drawPileButton");
-        Button skipTurnButton = (Button) parent.lookup("#skipTurnButton");
+        skipTurnButton = (Button) parent.lookup("#skipTurnButton");
         Button leaveButton = (Button) parent.lookup("#leaveButton");
 
         // set botBox content
@@ -95,8 +97,11 @@ public class IngameController implements Controller {
 
         // set listener for player cards
         playerCardsListener = event -> {
-            renderPlayerCards(playerCards);
-
+            if (event.getNewValue() != null) {
+                renderPlayerCards(playerCards);
+            } else {
+                app.show(new GameOverController(this.player));
+            }
         };
         this.player.listeners().addPropertyChangeListener(Player.PROPERTY_CARDS, playerCardsListener);
 
@@ -124,21 +129,25 @@ public class IngameController implements Controller {
             game.setDiscardPile(new Card(WILD, RED));
             buttonDisplay(false);
             gameService.nextPlayer();
+            gameService.endTurn();
         });
         blue.setOnAction(event -> {
             game.setDiscardPile(new Card(WILD, BLACK));
             buttonDisplay(false);
             gameService.nextPlayer();
+            gameService.endTurn();
         });
         yellow.setOnAction(event -> {
             game.setDiscardPile(new Card(WILD, YELLOW));
             buttonDisplay(false);
             gameService.nextPlayer();
+            gameService.endTurn();
         });
         green.setOnAction(event -> {
             game.setDiscardPile(new Card(WILD, GREEN));
             buttonDisplay(false);
             gameService.nextPlayer();
+            gameService.endTurn();
         });
 
         // set drawCardButton action
@@ -155,7 +164,10 @@ public class IngameController implements Controller {
         skipTurnButton.setOnAction(action -> {
             skipTurnButton.setVisible(false);
             drawCardButton.setDisable(false);
-            gameService.nextPlayer();
+            if(game.getCurrentPlayer().getType().equals(HUMAN)){
+                gameService.nextPlayer();
+                gameService.endTurn();
+            }
         });
 
         // set leave button action
@@ -180,6 +192,7 @@ public class IngameController implements Controller {
             button.setOnAction(action -> {
                 if (game.getCurrentPlayer().getType().equals(HUMAN)) {
                     gameService.playCard(game, card);
+                    skipTurnButton.setVisible(false);
                     drawCardButton.setDisable(false);
                 }
             });

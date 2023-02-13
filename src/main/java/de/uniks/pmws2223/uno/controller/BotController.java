@@ -3,6 +3,7 @@ package de.uniks.pmws2223.uno.controller;
 import de.uniks.pmws2223.uno.Main;
 import de.uniks.pmws2223.uno.model.Card;
 import de.uniks.pmws2223.uno.model.Player;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
@@ -12,8 +13,6 @@ import java.beans.PropertyChangeListener;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import static de.uniks.pmws2223.uno.Constants.MAX_DISPLAY;
 
 public class BotController implements Controller {
     private final Player bot;
@@ -62,12 +61,12 @@ public class BotController implements Controller {
     }
 
     private void createContent(HBox cardBox) throws IOException {
-            for (Card card : bot.getCards()) {
-                final CardController cardController = new CardController();
-                subControllers.add(cardController);
-                cardController.init();
-                cardBox.getChildren().add(cardController.render());
-            }
+        for (Card card : bot.getCards()) {
+            final CardController cardController = new CardController();
+            subControllers.add(cardController);
+            cardController.init();
+            cardBox.getChildren().add(cardController.render());
+        }
     }
 
     @Override

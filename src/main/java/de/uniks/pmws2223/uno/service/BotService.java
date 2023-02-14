@@ -57,6 +57,7 @@ public class BotService {
                     || card.getColor().equals(BLACK)) {
                 gameService.playCard(card);
 
+                //TODO sometimes card stays black
                 if(card.getValue().equals(WILD)){
                     int color = randomService.chooseColor();
                     game.setDiscardPile(new Card(WILD,COLORS.get(color)));

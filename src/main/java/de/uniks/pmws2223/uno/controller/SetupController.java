@@ -39,13 +39,13 @@ public class SetupController implements Controller {
     @Override
     public Parent render() throws IOException {
         // load fxml
-        //TODO backgorund
+        //TODO background
         Parent parent = FXMLLoader.load(Main.class.getResource("view/Setup.fxml"));
 
         // lookup content
         TextField nameField = (TextField) parent.lookup("#nameField");
         Slider botSelector = (Slider) parent.lookup("#botSelector");
-        Button tutorialButton = (Button) parent.lookup("#howToPlayButton");
+        Button tutorialButton = (Button) parent.lookup("#tutorialButton");
         Button startButton = (Button) parent.lookup("#startButton");
 
         // set action of buttons

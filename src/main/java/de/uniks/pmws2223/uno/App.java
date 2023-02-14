@@ -2,6 +2,7 @@ package de.uniks.pmws2223.uno;
 
 import de.uniks.pmws2223.uno.controller.Controller;
 import de.uniks.pmws2223.uno.controller.SetupController;
+import de.uniks.pmws2223.uno.service.RandomService;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -20,6 +21,17 @@ public class App extends Application {
         primaryStage.setTitle("Uno");
 
         show(new SetupController(this));
+        primaryStage.show();
+
+        primaryStage.setOnCloseRequest(e -> controller.destroy());
+    }
+
+    public void start(Stage primaryStage, RandomService randomService) throws Exception {
+        this.stage = primaryStage;
+        primaryStage.setScene(new Scene(new Label("Loading...")));
+        primaryStage.setTitle("Uno");
+
+        show(new SetupController(this, randomService));
         primaryStage.show();
 
         primaryStage.setOnCloseRequest(e -> controller.destroy());

@@ -20,10 +20,16 @@ import static de.uniks.pmws2223.uno.Constants.*;
 
 public class SetupController implements Controller {
     private final App app;
+    private final RandomService randomService;
 
+    public SetupController(App app, RandomService randomService) {
+        this.app = app;
+        this.randomService = randomService;
+    }
 
     public SetupController(App app) {
         this.app = app;
+        this.randomService = new RandomService();
     }
 
     @Override
@@ -58,7 +64,6 @@ public class SetupController implements Controller {
             Player player = playerService.createPlayer(nameField.getText()).setType(HUMAN);
 
             final SetupService setupService = new SetupService();
-            final RandomService randomService = new RandomService();
             Game game = setupService.createGame(randomService, player, (int) botSelector.getValue());
 
             final GameService gameService = new GameService(randomService, game);

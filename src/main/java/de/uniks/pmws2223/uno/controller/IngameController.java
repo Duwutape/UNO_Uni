@@ -5,8 +5,8 @@ import de.uniks.pmws2223.uno.Main;
 import de.uniks.pmws2223.uno.model.Card;
 import de.uniks.pmws2223.uno.model.Game;
 import de.uniks.pmws2223.uno.model.Player;
-import de.uniks.pmws2223.uno.service.RandomService;
 import de.uniks.pmws2223.uno.service.GameService;
+import de.uniks.pmws2223.uno.service.RandomService;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
@@ -14,7 +14,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Paint;
+import javafx.scene.text.TextAlignment;
 
 import java.beans.PropertyChangeListener;
 import java.io.IOException;
@@ -77,6 +79,7 @@ public class IngameController implements Controller {
         blue = (Button) parent.lookup("#chooseColorBlue");
         yellow = (Button) parent.lookup("#chooseColorYellow");
         green = (Button) parent.lookup("#chooseColorGreen");
+        Pane discardColor = (Pane) parent.lookup("#discardColorPane");
         Label discardValue = (Label) parent.lookup("#discardValueLabel");
         drawCardButton = (Button) parent.lookup("#drawPileButton");
         skipTurnButton = (Button) parent.lookup("#skipTurnButton");
@@ -106,14 +109,14 @@ public class IngameController implements Controller {
         // set discard Pile
         discardValue.setAlignment(Pos.CENTER);
         discardValue.setText(game.getDiscardPile().getValue());
-        discardValue.setTextFill(Paint.valueOf(game.getDiscardPile().getColor()));
+        createStyle(discardColor, discardValue, game.getDiscardPile());
 
         // set listener for discard pile
         discardPileListener = event -> {
             if (event.getNewValue() != null) {
                 Card card = (Card) event.getNewValue();
                 discardValue.setText(card.getValue());
-                discardValue.setTextFill(Paint.valueOf(card.getColor()));
+                createStyle(discardColor, discardValue, card);
 
                 if (game.getCurrentPlayer().equals(this.player) && game.getDiscardPile().getColor().equals(BLACK)) {
                     buttonDisplay(true);
@@ -151,6 +154,8 @@ public class IngameController implements Controller {
             gameService.endTurn();
         });
 
+        // ser drawCardButton alignment
+        drawCardButton.setTextAlignment(TextAlignment.CENTER);
         // set drawCardButton action
         drawCardButton.setOnAction(action -> {
             if (game.getCurrentPlayer().equals(this.player)) {
@@ -209,7 +214,55 @@ public class IngameController implements Controller {
             button.setPrefHeight(100);
             button.setId("card" + counter);
             button.setText(card.getValue());
-            button.setTextFill(Paint.valueOf(card.getColor()));
+
+            switch (card.getColor()) {
+                case RED -> {
+                    button.setTextFill(Paint.valueOf(DISPLAY_BLACK));
+                    button.setStyle(BACKGROUND_RADIUS + RADIUS + "; "
+                            + BORDER_RADIUS + RADIUS + "; "
+                            + BACKGROUND_COLOR + DISPLAY_RED + "; "
+                            + BORDER_COLOR + BLACK + "; "
+                            + FONT_SIZE + SIZE_SMALL + ";"
+                            + FONT_WEIGHT + BOLD);
+                }
+                case BLUE -> {
+                    button.setTextFill(Paint.valueOf(DISPLAY_BLACK));
+                    button.setStyle(BACKGROUND_RADIUS + RADIUS + "; "
+                            + BORDER_RADIUS + RADIUS + "; "
+                            + BACKGROUND_COLOR + DISPLAY_BLUE + ";"
+                            + BORDER_COLOR + BLACK + "; "
+                            + FONT_SIZE + SIZE_SMALL + ";"
+                            + FONT_WEIGHT + BOLD);
+                }
+                case YELLOW -> {
+                    button.setTextFill(Paint.valueOf(DISPLAY_BLACK));
+                    button.setStyle(BACKGROUND_RADIUS + RADIUS + "; "
+                            + BORDER_RADIUS + RADIUS + "; "
+                            + BACKGROUND_COLOR + DISPLAY_YELLOW + ";"
+                            + BORDER_COLOR + BLACK + "; "
+                            + FONT_SIZE + SIZE_SMALL + ";"
+                            + FONT_WEIGHT + BOLD);
+                }
+                case GREEN -> {
+                    button.setTextFill(Paint.valueOf(DISPLAY_BLACK));
+                    button.setStyle(BACKGROUND_RADIUS + RADIUS + "; "
+                            + BORDER_RADIUS + RADIUS + "; "
+                            + BACKGROUND_COLOR + DISPLAY_GREEN + ";"
+                            + BORDER_COLOR + BLACK + "; "
+                            + FONT_SIZE + SIZE_SMALL + ";"
+                            + FONT_WEIGHT + BOLD);
+                }
+                case BLACK -> {
+                    button.setTextFill(Paint.valueOf(DISPLAY_WHITE));
+                    button.setStyle(BACKGROUND_RADIUS + RADIUS + "; "
+                            + BORDER_RADIUS + RADIUS + "; "
+                            + BACKGROUND_COLOR + DISPLAY_BLACK + ";"
+                            + BORDER_COLOR + BLACK + "; "
+                            + FONT_SIZE + SIZE_SMALL + ";"
+                            + FONT_WEIGHT + BOLD);
+                }
+            }
+
             button.setOnAction(action -> {
                 if (game.getCurrentPlayer().getType().equals(HUMAN)) {
                     gameService.playCard(card);
@@ -218,6 +271,56 @@ public class IngameController implements Controller {
                 }
             });
             playerCards.getChildren().add(button);
+        }
+    }
+
+    private void createStyle(Pane discardColor, Label discardValue, Card card) {
+        switch (card.getColor()) {
+            case RED -> {
+                discardValue.setTextFill(Paint.valueOf(DISPLAY_BLACK));
+                discardValue.setStyle(FONT_SIZE + SIZE_BIG + ";"
+                        + FONT_WEIGHT + BOLD);
+                discardColor.setStyle(BACKGROUND_RADIUS + RADIUS + "; "
+                        + BORDER_RADIUS + RADIUS + "; "
+                        + BACKGROUND_COLOR + DISPLAY_RED + "; "
+                        + BORDER_COLOR + BLACK);
+            }
+            case BLUE -> {
+                discardValue.setTextFill(Paint.valueOf(DISPLAY_BLACK));
+                discardValue.setStyle(FONT_SIZE + SIZE_BIG + ";"
+                        + FONT_WEIGHT + BOLD);
+                discardColor.setStyle(BACKGROUND_RADIUS + RADIUS + "; "
+                        + BORDER_RADIUS + RADIUS + "; "
+                        + BACKGROUND_COLOR + DISPLAY_BLUE + "; "
+                        + BORDER_COLOR + BLACK);
+            }
+            case YELLOW -> {
+                discardValue.setTextFill(Paint.valueOf(DISPLAY_BLACK));
+                discardValue.setStyle(FONT_SIZE + SIZE_BIG + ";"
+                        + FONT_WEIGHT + BOLD);
+                discardColor.setStyle(BACKGROUND_RADIUS + RADIUS + "; "
+                        + BORDER_RADIUS + RADIUS + "; "
+                        + BACKGROUND_COLOR + DISPLAY_YELLOW + "; "
+                        + BORDER_COLOR + BLACK);
+            }
+            case GREEN -> {
+                discardValue.setTextFill(Paint.valueOf(DISPLAY_BLACK));
+                discardValue.setStyle(FONT_SIZE + SIZE_BIG + ";"
+                        + FONT_WEIGHT + BOLD);
+                discardColor.setStyle(BACKGROUND_RADIUS + RADIUS + "; "
+                        + BORDER_RADIUS + RADIUS + "; "
+                        + BACKGROUND_COLOR + DISPLAY_GREEN + "; "
+                        + BORDER_COLOR + BLACK);
+            }
+            case BLACK -> {
+                discardValue.setTextFill(Paint.valueOf(DISPLAY_WHITE));
+                discardValue.setStyle(FONT_SIZE + SIZE_BIG + ";"
+                        + FONT_WEIGHT + BOLD);
+                discardColor.setStyle(BACKGROUND_RADIUS + RADIUS + "; "
+                        + BORDER_RADIUS + RADIUS + "; "
+                        + BACKGROUND_COLOR + DISPLAY_BLACK + "; "
+                        + BORDER_COLOR + BLACK);
+            }
         }
     }
 

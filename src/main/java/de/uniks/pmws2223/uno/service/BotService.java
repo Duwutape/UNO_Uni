@@ -30,8 +30,8 @@ public class BotService {
             @Override
             public void run() {
                 Platform.runLater(() -> {
-                    playRound();
                     timer.cancel();
+                    playRound();
                 });
             }
         }, 2000);
@@ -62,6 +62,8 @@ public class BotService {
                 if(card.getValue().equals(WILD)){
                     int color = randomService.chooseColor();
                     game.setDiscardPile(new Card(WILD,COLORS.get(color)));
+                    gameService.nextPlayer();
+                    gameService.endTurn();
                 }
                 playedCard = true;
             }

@@ -16,7 +16,7 @@
   roles: 	card_game 	card_player
 
 - game: 	org.fulib.classmodel.Clazz
-  attributes: 	game_direction
+  attributes: 	game_direction 	game_hasWon
   model: 	c
   modified: 	false
   name: 	Game
@@ -104,6 +104,15 @@
   propertyStyle: 	Bean
   type: 	String
   typeSignature: 	String
+
+- game_hasWon: 	org.fulib.classmodel.Attribute
+  clazz: 	game
+  id: 	Game_hasWon
+  modified: 	false
+  name: 	hasWon
+  propertyStyle: 	Bean
+  type: 	Player
+  typeSignature: 	Player
 
 - game_discardPile: 	org.fulib.classmodel.AssocRole
   aggregation: 	false

@@ -1,6 +1,5 @@
 package de.uniks.pmws2223.uno.service;
 
-import de.uniks.pmws2223.uno.controller.BotController;
 import de.uniks.pmws2223.uno.model.Card;
 import de.uniks.pmws2223.uno.model.Game;
 import de.uniks.pmws2223.uno.model.Player;
@@ -25,16 +24,25 @@ public class GameService {
             game.setDiscardPile(card);
             card.getPlayer().withoutCards(card);
 
+            if (game.getCurrentPlayer().getCards() == null) {
+                game.setHasWon(game.getCurrentPlayer());
+            }
+
             switch (card.getValue()) {
-                case REVERSE -> game.setDirection(COUNTER_CLOCKWISE);
+                case REVERSE -> {
+                    setDirection();
+                    nextPlayer();
+                    endTurn();
+                }
                 case SKIP -> skipPlayer();
                 case DRAW -> drawTwo();
-                default -> {nextPlayer();
-                    endTurn();}
+                case BLACK -> {
+                }
+                default -> {
+                    nextPlayer();
+                    endTurn();
+                }
             }
-        } else if (card.getColor().equals(BLACK)) {
-            game.setDiscardPile(card);
-            card.getPlayer().withoutCards(card);
         }
     }
 
@@ -50,10 +58,24 @@ public class GameService {
         List<Player> players = game.getPlayers();
         int index = players.indexOf(game.getCurrentPlayer());
 
+        System.out.println(index);
+        System.out.println(players.size());
+        int newPlayer;
         if (game.getDirection().equals(CLOCKWISE)) {
-            game.setCurrentPlayer(players.get((index + 1) % players.size()));
+            newPlayer = (index + 1) % players.size();
         } else {
-            game.setCurrentPlayer(players.get((index + players.size() - 1) % players.size()));
+            newPlayer = (index + players.size() - 1) % players.size();
+        }
+        game.setCurrentPlayer(players.get(newPlayer));
+    }
+
+    private void setDirection(){
+        String currentDirection = game.getDirection();
+
+        if(currentDirection.equals(CLOCKWISE)) {
+            game.setDirection(COUNTER_CLOCKWISE);
+        } else {
+            game.setDirection(CLOCKWISE);
         }
     }
 

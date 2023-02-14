@@ -12,11 +12,13 @@ public class Game
    public static final String PROPERTY_DISCARD_PILE = "discardPile";
    public static final String PROPERTY_PLAYERS = "players";
    public static final String PROPERTY_DIRECTION = "direction";
+   public static final String PROPERTY_HAS_WON = "hasWon";
    public static final String PROPERTY_CURRENT_PLAYER = "currentPlayer";
    protected PropertyChangeSupport listeners;
    private Card discardPile;
    private List<Player> players;
    private String direction;
+   private Player hasWon;
    private Player currentPlayer;
 
    public Card getDiscardPile()
@@ -127,6 +129,24 @@ public class Game
       final String oldValue = this.direction;
       this.direction = value;
       this.firePropertyChange(PROPERTY_DIRECTION, oldValue, value);
+      return this;
+   }
+
+   public Player getHasWon()
+   {
+      return this.hasWon;
+   }
+
+   public Game setHasWon(Player value)
+   {
+      if (Objects.equals(value, this.hasWon))
+      {
+         return this;
+      }
+
+      final Player oldValue = this.hasWon;
+      this.hasWon = value;
+      this.firePropertyChange(PROPERTY_HAS_WON, oldValue, value);
       return this;
    }
 

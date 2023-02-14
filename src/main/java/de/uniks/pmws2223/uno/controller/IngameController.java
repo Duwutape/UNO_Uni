@@ -7,7 +7,6 @@ import de.uniks.pmws2223.uno.model.Game;
 import de.uniks.pmws2223.uno.model.Player;
 import de.uniks.pmws2223.uno.service.CardService;
 import de.uniks.pmws2223.uno.service.GameService;
-import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
@@ -39,6 +38,8 @@ public class IngameController implements Controller {
     private Button green;
     private Button drawCardButton;
     private Button skipTurnButton;
+    private PropertyChangeListener hasWonListener;
+    private PropertyChangeListener currentPlayerListener;
 
     public IngameController(App app, GameService gameService, CardService cardService, Game game) {
         this.app = app;
@@ -80,6 +81,7 @@ public class IngameController implements Controller {
         drawCardButton = (Button) parent.lookup("#drawPileButton");
         skipTurnButton = (Button) parent.lookup("#skipTurnButton");
         Button leaveButton = (Button) parent.lookup("#leaveButton");
+        Label turn = (Label) parent.lookup("#turnLabel");
 
         // set botBox content
         for (Player player : game.getPlayers()) {
@@ -97,11 +99,7 @@ public class IngameController implements Controller {
 
         // set listener for player cards
         playerCardsListener = event -> {
-            if (event.getNewValue() != null) {
-                renderPlayerCards(playerCards);
-            } else {
-                app.show(new GameOverController(this.player));
-            }
+            renderPlayerCards(playerCards);
         };
         this.player.listeners().addPropertyChangeListener(Player.PROPERTY_CARDS, playerCardsListener);
 
@@ -164,7 +162,7 @@ public class IngameController implements Controller {
         skipTurnButton.setOnAction(action -> {
             skipTurnButton.setVisible(false);
             drawCardButton.setDisable(false);
-            if(game.getCurrentPlayer().getType().equals(HUMAN)){
+            if (game.getCurrentPlayer().getType().equals(HUMAN)) {
                 gameService.nextPlayer();
                 gameService.endTurn();
             }
@@ -174,6 +172,26 @@ public class IngameController implements Controller {
         leaveButton.setOnAction(action -> {
             app.show(new SetupController(app));
         });
+
+        // set listener for game over
+        hasWonListener = event -> {
+            if (event.getNewValue() != null) {
+                app.show(new GameOverController(app, (Player) (event.getNewValue())));
+            }
+        };
+        game.listeners().addPropertyChangeListener(Game.PROPERTY_HAS_WON, hasWonListener);
+
+        // set turn label text
+        turn.setText(game.getCurrentPlayer().getName());
+
+        // set turn label listener
+        currentPlayerListener = event -> {
+            if (event.getNewValue() != null) {
+                Player player = (Player) event.getNewValue();
+                turn.setText(player.getName());
+            }
+        };
+        game.listeners().addPropertyChangeListener(Game.PROPERTY_CURRENT_PLAYER, currentPlayerListener);
 
         return parent;
     }
@@ -211,5 +229,7 @@ public class IngameController implements Controller {
     public void destroy() {
         game.listeners().removePropertyChangeListener(Game.PROPERTY_DISCARD_PILE, discardPileListener);
         this.player.listeners().removePropertyChangeListener(Player.PROPERTY_CARDS, playerCardsListener);
+        game.listeners().removePropertyChangeListener(Game.PROPERTY_HAS_WON, hasWonListener);
+        game.listeners().removePropertyChangeListener(Game.PROPERTY_CURRENT_PLAYER, currentPlayerListener);
     }
 }

@@ -12,8 +12,11 @@ public class Constants {
     public static final String CLOCKWISE = "clockwise";
     public static final String COUNTER_CLOCKWISE = "counterclockwise";
 
-    // max bot card display
-    public static final int MAX_DISPLAY = 7;
+    // has won ints
+    public static final int WON_PLAYER = 1;
+    public static final int WON_BOTO = 2;
+    public static final int WON_BOT1 = 3;
+    public static final int WON_BOT2 = 4;
 
     // card colors
     public static final String YELLOW = "yellow";

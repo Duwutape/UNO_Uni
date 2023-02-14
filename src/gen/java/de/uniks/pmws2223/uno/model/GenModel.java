@@ -11,6 +11,7 @@ public class GenModel implements ClassModelDecorator {
 
     class Game {
         String direction;
+        Player hasWon;
 
         @Link("game")
         List<Player> players;

@@ -39,7 +39,6 @@ public class SetupController implements Controller {
 
     @Override
     public Parent render() throws IOException {
-
         // load fxml
         Parent parent = FXMLLoader.load(Main.class.getResource("view/Setup.fxml"));
 

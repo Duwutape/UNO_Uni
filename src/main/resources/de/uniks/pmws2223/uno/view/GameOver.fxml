@@ -41,16 +41,15 @@
 
 <VBox xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
   <children>
-    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="168.0" prefWidth="139.0" VBox.vgrow="ALWAYS">
          <children>
-            <Label fx:id="GameOverLabel" layoutX="36.0" layoutY="62.0" text="Game Over">
+            <Label fx:id="gameOverLabel" layoutX="10.0" layoutY="39.0" text="Game Over">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
-            <Label fx:id="InfoLabel" layoutX="70.0" layoutY="97.0" text="BotX won" />
-            <Button fx:id="playAgainButton" layoutY="168.0" mnemonicParsing="false" text="Play Again" />
-            <Button fx:id="MenuButton" layoutX="102.0" layoutY="167.0" mnemonicParsing="false" text="Back to Menu" />
+            <Label fx:id="infoLabel" layoutX="44.0" layoutY="76.0" text="BotX won" />
+            <Button fx:id="menuButton" layoutX="25.0" layoutY="116.0" mnemonicParsing="false" text="Back to Menu" />
          </children>
          <VBox.margin>
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />

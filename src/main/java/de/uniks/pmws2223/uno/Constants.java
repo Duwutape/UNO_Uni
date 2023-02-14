@@ -9,8 +9,7 @@ public class Constants {
     public static final String BOT = "bot";
 
     // cards at start
-    //TODO change to 7
-    public static final int NUMBER_CARDS_START = 3;
+    public static final int NUMBER_CARDS_START = 7;
 
     // direction
     public static final String CLOCKWISE = "clockwise";

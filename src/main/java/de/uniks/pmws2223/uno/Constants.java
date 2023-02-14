@@ -8,15 +8,14 @@ public class Constants {
     public static final String HUMAN = "human";
     public static final String BOT = "bot";
 
+    // cards at start
+    //TODO change to 7
+    public static final int NUMBER_CARDS_START = 3;
+
     // direction
     public static final String CLOCKWISE = "clockwise";
     public static final String COUNTER_CLOCKWISE = "counterclockwise";
 
-    // has won ints
-    public static final int WON_PLAYER = 1;
-    public static final int WON_BOTO = 2;
-    public static final int WON_BOT1 = 3;
-    public static final int WON_BOT2 = 4;
 
     // card colors
     public static final String YELLOW = "yellow";

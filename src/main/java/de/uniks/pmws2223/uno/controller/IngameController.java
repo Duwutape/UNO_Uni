@@ -122,6 +122,9 @@ public class IngameController implements Controller {
         };
         game.listeners().addPropertyChangeListener(Game.PROPERTY_DISCARD_PILE, discardPileListener);
 
+        // set changeColorButtons
+        buttonDisplay(false);
+
         // set changeColorButtons action
         red.setOnAction(event -> {
             game.setDiscardPile(new Card(WILD, RED));
@@ -176,7 +179,7 @@ public class IngameController implements Controller {
         // set listener for game over
         hasWonListener = event -> {
             if (event.getNewValue() != null) {
-                app.show(new GameOverController(app, (Player) (event.getNewValue())));
+                app.show(new GameOverController(app, (Player) event.getNewValue()));
             }
         };
         game.listeners().addPropertyChangeListener(Game.PROPERTY_HAS_WON, hasWonListener);
@@ -209,7 +212,7 @@ public class IngameController implements Controller {
             button.setTextFill(Paint.valueOf(card.getColor()));
             button.setOnAction(action -> {
                 if (game.getCurrentPlayer().getType().equals(HUMAN)) {
-                    gameService.playCard(game, card);
+                    gameService.playCard(card);
                     skipTurnButton.setVisible(false);
                     drawCardButton.setDisable(false);
                 }

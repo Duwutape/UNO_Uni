@@ -29,9 +29,11 @@ public class BotService {
             public void run() {
                 Platform.runLater(() -> {
                     playRound();
+                    timer.cancel();
                 });
             }
         }, 2000);
+        //TODO change timer to 2000
     }
 
     public void playRound() {
@@ -42,18 +44,18 @@ public class BotService {
             playCard();
             if (!playedCard) {
                 gameService.nextPlayer();
+                gameService.endTurn();
             }
         }
-        gameService.endTurn();
     }
 
     private void playCard() {
-
+        //TODO bot plays wild
         for (Card card : currentPlayer.getCards()) {
             if (card.getValue().equals(game.getDiscardPile().getValue())
                     || card.getColor().equals(game.getDiscardPile().getColor())
                     || card.getColor().equals(BLACK)) {
-                gameService.playCard(game, card);
+                gameService.playCard(card);
                 playedCard = true;
             }
         }

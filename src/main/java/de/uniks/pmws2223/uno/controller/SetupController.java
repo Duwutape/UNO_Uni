@@ -51,7 +51,6 @@ public class SetupController implements Controller {
         startButton.setOnAction(action -> {
             final PlayerService playerService = new PlayerService();
             Player player = playerService.createPlayer(nameField.getText()).setType(HUMAN);
-            player.withCards(new Card(WILD, BLACK), new Card(DRAW, RED), new Card(DRAW, GREEN), new Card(DRAW, BLUE), new Card(DRAW, YELLOW));
 
             final SetupService setupService = new SetupService();
             final CardService cardService = new CardService();

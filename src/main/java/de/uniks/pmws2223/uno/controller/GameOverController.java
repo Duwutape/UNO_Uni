@@ -10,16 +10,16 @@ import javafx.scene.control.Label;
 
 import java.io.IOException;
 
-import static de.uniks.pmws2223.uno.Constants.*;
+import static de.uniks.pmws2223.uno.Constants.HUMAN;
 
-public class GameOverController implements Controller{
+public class GameOverController implements Controller {
 
     private final App app;
     private final Player hasWon;
 
     public GameOverController(App app, Player hasWon) {
-    this.app =app;
-    this.hasWon = hasWon;
+        this.app = app;
+        this.hasWon = hasWon;
     }
 
     @Override
@@ -40,10 +40,10 @@ public class GameOverController implements Controller{
         // lookup content
         Label gameOver = (Label) parent.lookup("#gameOverLabel");
         Label info = (Label) parent.lookup("#infoLabel");
-        Button menuButton = (Button) parent.lookup("menuButton");
+        Button menuButton = (Button) parent.lookup("#menuButton");
 
         // set label content
-        if(hasWon.getType().equals(HUMAN)){
+        if (hasWon.getType().equals(HUMAN)) {
             gameOver.setText("You won!");
             info.setVisible(false);
         } else {
@@ -52,7 +52,7 @@ public class GameOverController implements Controller{
         }
 
         // set button action
-        menuButton.setOnAction(action ->{
+        menuButton.setOnAction(action -> {
             app.show(new SetupController(app));
         });
 

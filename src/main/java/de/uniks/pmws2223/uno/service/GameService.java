@@ -17,30 +17,40 @@ public class GameService {
         this.game = game;
     }
 
-    public void playCard(Game game, Card card) {
-        this.game = game;
-        Card discardPile = game.getDiscardPile();
-        if (card.getValue().equals(discardPile.getValue()) || card.getColor().equals(discardPile.getColor())) {
+    public void playCard(Card card) {
+
+        if (card.getValue().equals(game.getDiscardPile().getValue())
+                || card.getColor().equals(game.getDiscardPile().getColor())
+                || card.getColor().equals(BLACK)) {
+
             game.setDiscardPile(card);
             card.getPlayer().withoutCards(card);
+            System.out.println(game.getCurrentPlayer().getCards().size());
 
-            if (game.getCurrentPlayer().getCards() == null) {
+            if (game.getCurrentPlayer().getCards().size() == 0) {
                 game.setHasWon(game.getCurrentPlayer());
-            }
+            } else {
 
-            switch (card.getValue()) {
-                case REVERSE -> {
-                    setDirection();
-                    nextPlayer();
-                    endTurn();
-                }
-                case SKIP -> skipPlayer();
-                case DRAW -> drawTwo();
-                case BLACK -> {
-                }
-                default -> {
-                    nextPlayer();
-                    endTurn();
+                switch (card.getValue()) {
+                    case REVERSE -> {
+                        setDirection();
+                        nextPlayer();
+                        endTurn();
+                    }
+                    case SKIP -> {
+                        skipPlayer();
+                        endTurn();
+                    }
+                    case DRAW -> {
+                        drawTwo();
+                        endTurn();
+                    }
+                    case WILD -> {
+                    }
+                    default -> {
+                        nextPlayer();
+                        endTurn();
+                    }
                 }
             }
         }
@@ -58,8 +68,6 @@ public class GameService {
         List<Player> players = game.getPlayers();
         int index = players.indexOf(game.getCurrentPlayer());
 
-        System.out.println(index);
-        System.out.println(players.size());
         int newPlayer;
         if (game.getDirection().equals(CLOCKWISE)) {
             newPlayer = (index + 1) % players.size();
@@ -69,10 +77,10 @@ public class GameService {
         game.setCurrentPlayer(players.get(newPlayer));
     }
 
-    private void setDirection(){
+    private void setDirection() {
         String currentDirection = game.getDirection();
 
-        if(currentDirection.equals(CLOCKWISE)) {
+        if (currentDirection.equals(CLOCKWISE)) {
             game.setDirection(COUNTER_CLOCKWISE);
         } else {
             game.setDirection(CLOCKWISE);
@@ -82,14 +90,12 @@ public class GameService {
     private void skipPlayer() {
         nextPlayer();
         nextPlayer();
-        endTurn();
     }
 
     private void drawTwo() {
         nextPlayer();
         game.getCurrentPlayer().withCards(drawCard(), drawCard());
         nextPlayer();
-        endTurn();
     }
 
     public void endTurn() {

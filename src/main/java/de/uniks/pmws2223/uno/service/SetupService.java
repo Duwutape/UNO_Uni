@@ -1,5 +1,6 @@
 package de.uniks.pmws2223.uno.service;
 
+import de.uniks.pmws2223.uno.Constants;
 import de.uniks.pmws2223.uno.model.Card;
 import de.uniks.pmws2223.uno.model.Game;
 import de.uniks.pmws2223.uno.model.Player;
@@ -21,14 +22,14 @@ public class SetupService {
         }
 
         for (int i = 0; i < numberBots; i++) {
-            new Player().setName("bot" + i)
+            new Player().setName(NAMES.get(i))
                     .setType(BOT)
                     .setGame(game);
         }
 
-        for (Player play : game.getPlayers()) {
-            for (int i = 0; i < NUMBER_CARDS_START; i++) {
-                play.withCards(randomService.createCard());
+        for (Player players : game.getPlayers()) {
+            for (int i = 1; i <= NUMBER_CARDS_START; i++) {
+                players.withCards(randomService.createCard());
             }
 
         }

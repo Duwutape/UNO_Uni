@@ -15,14 +15,25 @@ public class Constants {
     public static final String CLOCKWISE = "clockwise";
     public static final String COUNTER_CLOCKWISE = "counterclockwise";
 
-    // syles
+    // bot names
+    public static final String RAVEN = "Raven";
+    public static final String STORM = "Storm";
+    public static final String CLARKE = "Clark";
+    public static final List<String> NAMES = List.of(RAVEN, STORM, CLARKE);
+
+    // botBox numbers
+    public static final int BOT_BOX_ZERO = 0;
+    public static final int BOT_BOX_ONE = 1;
+    public static final int BOT_BOX_TWO = 2;
+
+    // styles
     public static final String BACKGROUND_COLOR = "-fx-background-color: ";
     public static final String BACKGROUND_RADIUS = "-fx-background-radius: ";
     public static final String BORDER_COLOR = "-fx-border-color: ";
     public static final String BORDER_RADIUS = "-fx-border-radius: ";
     public static final String FONT_SIZE = "-fx-font-size: ";
     public static final String FONT_WEIGHT = "-fx-font-weight: ";
-    public static final int  RADIUS = 10;
+    public static final int RADIUS = 10;
     public static final int SIZE_SMALL = 14;
     public static final int SIZE_BIG = 24;
     public static final String BOLD = "bold";
@@ -35,7 +46,6 @@ public class Constants {
     public static final String DISPLAY_BLACK = "#090909";
     public static final String DISPLAY_WHITE = "#c3c3c3";
 
-
     // card colors
     public static final String YELLOW = "yellow";
     public static final String RED = "red";
@@ -43,7 +53,6 @@ public class Constants {
     public static final String BLUE = "blue";
     public static final String BLACK = "black";
     public static final List<String> COLORS = List.of(YELLOW, RED, GREEN, BLUE, BLACK);
-
 
     // card value
     public static final String ZERO = "0";

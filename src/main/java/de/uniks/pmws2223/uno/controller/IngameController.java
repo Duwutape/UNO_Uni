@@ -12,7 +12,6 @@ import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Paint;
@@ -32,6 +31,12 @@ public class IngameController implements Controller {
     private final Game game;
     private Player player;
     private final List<Controller> subControllers = new ArrayList<>();
+    private HBox bot0Box;
+    private HBox bot1Box;
+    private HBox bot2Box;
+    private Label bot0Label;
+    private Label bot1Label;
+    private Label bot2Label;
     private PropertyChangeListener discardPileListener;
     private PropertyChangeListener playerCardsListener;
     private Button red;
@@ -42,6 +47,7 @@ public class IngameController implements Controller {
     private Button skipTurnButton;
     private PropertyChangeListener hasWonListener;
     private PropertyChangeListener currentPlayerListener;
+    private PropertyChangeListener botCardListener;
 
     public IngameController(App app, GameService gameService, RandomService randomService, Game game) {
         this.app = app;
@@ -71,10 +77,14 @@ public class IngameController implements Controller {
         Parent parent = FXMLLoader.load(Main.class.getResource("view/Ingame.fxml"));
 
         // lookup content
-        HBox botBox = (HBox) parent.lookup("#botBox");
-        ScrollPane playerBox = (ScrollPane) parent.lookup("#playerBox");
-        HBox playerCards = (HBox) playerBox.getContent().lookup("#cardBoxPlayer");
+        bot0Box = (HBox) parent.lookup("#bot0Box");
+        bot1Box = (HBox) parent.lookup("#bot1Box");
+        bot2Box = (HBox) parent.lookup("#bot2Box");
+        HBox playerCards = (HBox) parent.lookup("#cardBoxPlayer");
         Label playerName = (Label) parent.lookup("#namePlayerLabel");
+        bot0Label = (Label) parent.lookup("#bot0Label");
+        bot1Label = (Label) parent.lookup("#bot1Label");
+        bot2Label = (Label) parent.lookup("#bot2Label");
         red = (Button) parent.lookup("#chooseColorRed");
         blue = (Button) parent.lookup("#chooseColorBlue");
         yellow = (Button) parent.lookup("#chooseColorYellow");
@@ -86,17 +96,37 @@ public class IngameController implements Controller {
         Button leaveButton = (Button) parent.lookup("#leaveButton");
         Label turn = (Label) parent.lookup("#turnLabel");
 
-        // set botBox content
-        for (Player player : game.getPlayers()) {
-            if (player.getType().equals("bot")) {
-                final BotController botController = new BotController(player);
-                subControllers.add(botController);
-                botController.init();
-                botBox.getChildren().add(botController.render());
+        // set bot label alignment and set invisible
+        bot0Label.setAlignment(Pos.CENTER);
+        bot1Label.setAlignment(Pos.CENTER);
+        bot2Label.setAlignment(Pos.CENTER);
+        bot0Label.setVisible(false);
+        bot1Label.setVisible(false);
+        bot2Label.setVisible(false);
+
+        // set bot content
+        for (Player bot : game.getPlayers()) {
+            if (bot.getType().equals(BOT)) {
+                renderBot(bot);
+            }
+        }
+
+        // set bot card listener
+        for (Player bot : game.getPlayers()) {
+            if (bot.getType().equals(BOT)) {
+                botCardListener = event -> {
+                    try {
+                        renderBot(bot);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                };
+                bot.listeners().addPropertyChangeListener(Player.PROPERTY_CARDS, this.botCardListener);
             }
         }
 
         // set player Content
+        playerName.setAlignment(Pos.CENTER);
         playerName.setText(this.player.getName());
         renderPlayerCards(playerCards);
 
@@ -154,8 +184,9 @@ public class IngameController implements Controller {
             gameService.endTurn();
         });
 
-        // ser drawCardButton alignment
+        // set drawCardButton alignment
         drawCardButton.setTextAlignment(TextAlignment.CENTER);
+
         // set drawCardButton action
         drawCardButton.setOnAction(action -> {
             if (game.getCurrentPlayer().equals(this.player)) {
@@ -202,6 +233,81 @@ public class IngameController implements Controller {
         game.listeners().addPropertyChangeListener(Game.PROPERTY_CURRENT_PLAYER, currentPlayerListener);
 
         return parent;
+    }
+
+    private void renderBot(Player bot) throws IOException {
+        final int cards = bot.getCards().size();
+
+        if (bot.getName().equals(RAVEN)) {
+            if (game.getPlayers().size() == 2) {
+
+                bot1Label.setText(RAVEN);
+                bot1Label.setVisible(true);
+                bot1Box.getChildren().clear();
+
+                for (int i = 1; i <= cards; i++) {
+                    final CardController cardController = new CardController();
+                    subControllers.add(cardController);
+                    cardController.init();
+
+                    bot1Box.getChildren().add(cardController.render());
+                }
+            } else {
+
+                bot0Label.setText(RAVEN);
+                bot0Label.setVisible(true);
+                bot0Box.getChildren().clear();
+
+                for (int i = 1; i <= cards; i++) {
+                    final CardController cardController = new CardController();
+                    subControllers.add(cardController);
+                    cardController.init();
+
+                    bot0Box.getChildren().add(cardController.render());
+                }
+            }
+        } else if (bot.getName().equals(STORM)) {
+            if (game.getPlayers().size() == 3) {
+
+                bot2Label.setText(STORM);
+                bot2Label.setVisible(true);
+                bot2Box.getChildren().clear();
+
+                for (int i = 1; i <= cards; i++) {
+                    final CardController cardController = new CardController();
+                    subControllers.add(cardController);
+                    cardController.init();
+
+                    bot2Box.getChildren().add(cardController.render());
+                }
+            } else {
+
+                bot1Label.setText(STORM);
+                bot1Label.setVisible(true);
+                bot1Box.getChildren().clear();
+
+                for (int i = 1; i <= cards; i++) {
+                    final CardController cardController = new CardController();
+                    subControllers.add(cardController);
+                    cardController.init();
+
+                    bot1Box.getChildren().add(cardController.render());
+                }
+            }
+        } else {
+
+            bot2Label.setText(CLARKE);
+            bot2Label.setVisible(true);
+            bot2Box.getChildren().clear();
+
+            for (int i = 1; i <= cards; i++) {
+                final CardController cardController = new CardController();
+                subControllers.add(cardController);
+                cardController.init();
+
+                bot2Box.getChildren().add(cardController.render());
+            }
+        }
     }
 
     private void renderPlayerCards(HBox playerCards) {
@@ -338,5 +444,10 @@ public class IngameController implements Controller {
         this.player.listeners().removePropertyChangeListener(Player.PROPERTY_CARDS, playerCardsListener);
         game.listeners().removePropertyChangeListener(Game.PROPERTY_HAS_WON, hasWonListener);
         game.listeners().removePropertyChangeListener(Game.PROPERTY_CURRENT_PLAYER, currentPlayerListener);
+        for (Player bot : game.getPlayers()){
+            if (bot.getType().equals(BOT)){
+                bot.listeners().removePropertyChangeListener(Player.PROPERTY_CARDS, this.botCardListener);
+            }
+        }
     }
 }

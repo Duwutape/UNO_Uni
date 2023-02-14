@@ -45,7 +45,6 @@ public class SetupController implements Controller {
     @Override
     public Parent render() throws IOException {
         // load fxml
-        //TODO background
         Parent parent = FXMLLoader.load(Main.class.getResource("view/Setup.fxml"));
 
         // lookup content

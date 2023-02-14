@@ -9,7 +9,7 @@ import javafx.scene.layout.Pane;
 
 import java.io.IOException;
 
-public class CardController implements Controller{
+public class CardController implements Controller {
 
     @Override
     public String getTitle() {
@@ -32,6 +32,7 @@ public class CardController implements Controller{
 
         //create content
         cardText.setAlignment(Pos.CENTER);
+
         return parent;
     }
 

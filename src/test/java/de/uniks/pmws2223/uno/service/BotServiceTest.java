@@ -9,6 +9,7 @@ import org.testfx.framework.junit.ApplicationTest;
 import java.util.Random;
 
 import static de.uniks.pmws2223.uno.Constants.*;
+import static org.junit.Assert.assertEquals;
 
 public class BotServiceTest extends ApplicationTest {
 
@@ -47,32 +48,32 @@ public class BotServiceTest extends ApplicationTest {
            Cards of bot2: [reverse, red], [reverse, blue], [8, red]
            Cards of bot3: [0, yellow], [8, red], [8, red]
            */
-        Assert.assertEquals(EIGHT, game.getDiscardPile().getValue());
-        Assert.assertEquals(RED, game.getDiscardPile().getColor());
-        Assert.assertEquals(SKIP, player.getCards().get(0).getValue());
-        Assert.assertEquals(RED, player.getCards().get(0).getColor());
-        Assert.assertEquals(SIX, player.getCards().get(1).getValue());
-        Assert.assertEquals(GREEN, player.getCards().get(1).getColor());
-        Assert.assertEquals(NINE, player.getCards().get(2).getValue());
-        Assert.assertEquals(GREEN, player.getCards().get(2).getColor());
-        Assert.assertEquals(SEVEN, bot1.getCards().get(0).getValue());
-        Assert.assertEquals(BLUE, bot1.getCards().get(0).getColor());
-        Assert.assertEquals(FIVE, bot1.getCards().get(1).getValue());
-        Assert.assertEquals(GREEN, bot1.getCards().get(1).getColor());
-        Assert.assertEquals(FIVE, bot1.getCards().get(2).getValue());
-        Assert.assertEquals(BLUE, bot1.getCards().get(2).getColor());
-        Assert.assertEquals(REVERSE, bot2.getCards().get(0).getValue());
-        Assert.assertEquals(RED, bot2.getCards().get(0).getColor());
-        Assert.assertEquals(REVERSE, bot2.getCards().get(1).getValue());
-        Assert.assertEquals(BLUE, bot2.getCards().get(1).getColor());
-        Assert.assertEquals(EIGHT, bot2.getCards().get(2).getValue());
-        Assert.assertEquals(RED, bot2.getCards().get(2).getColor());
-        Assert.assertEquals(ZERO, bot3.getCards().get(0).getValue());
-        Assert.assertEquals(YELLOW, bot3.getCards().get(0).getColor());
-        Assert.assertEquals(EIGHT, bot3.getCards().get(1).getValue());
-        Assert.assertEquals(RED, bot3.getCards().get(1).getColor());
-        Assert.assertEquals(EIGHT, bot3.getCards().get(2).getValue());
-        Assert.assertEquals(RED, bot3.getCards().get(2).getColor());
+        assertEquals(EIGHT, game.getDiscardPile().getValue());
+        assertEquals(RED, game.getDiscardPile().getColor());
+        assertEquals(SKIP, player.getCards().get(0).getValue());
+        assertEquals(RED, player.getCards().get(0).getColor());
+        assertEquals(SIX, player.getCards().get(1).getValue());
+        assertEquals(GREEN, player.getCards().get(1).getColor());
+        assertEquals(NINE, player.getCards().get(2).getValue());
+        assertEquals(GREEN, player.getCards().get(2).getColor());
+        assertEquals(SEVEN, bot1.getCards().get(0).getValue());
+        assertEquals(BLUE, bot1.getCards().get(0).getColor());
+        assertEquals(FIVE, bot1.getCards().get(1).getValue());
+        assertEquals(GREEN, bot1.getCards().get(1).getColor());
+        assertEquals(FIVE, bot1.getCards().get(2).getValue());
+        assertEquals(BLUE, bot1.getCards().get(2).getColor());
+        assertEquals(REVERSE, bot2.getCards().get(0).getValue());
+        assertEquals(RED, bot2.getCards().get(0).getColor());
+        assertEquals(REVERSE, bot2.getCards().get(1).getValue());
+        assertEquals(BLUE, bot2.getCards().get(1).getColor());
+        assertEquals(EIGHT, bot2.getCards().get(2).getValue());
+        assertEquals(RED, bot2.getCards().get(2).getColor());
+        assertEquals(ZERO, bot3.getCards().get(0).getValue());
+        assertEquals(YELLOW, bot3.getCards().get(0).getColor());
+        assertEquals(EIGHT, bot3.getCards().get(1).getValue());
+        assertEquals(RED, bot3.getCards().get(1).getColor());
+        assertEquals(EIGHT, bot3.getCards().get(2).getValue());
+        assertEquals(RED, bot3.getCards().get(2).getColor());
 
         /* The bots are programmed in a way that they always play the first card which matches the color or value
            of the card on the discard pile or which is a wild card.
@@ -84,13 +85,13 @@ public class BotServiceTest extends ApplicationTest {
            Cards of bot3: [0, yellow], [8, red], [8, red]*/
 
         gameService.playCard(player.getCards().get(0));
-        Assert.assertEquals(2, player.getCards().size());
-        Assert.assertEquals(3, bot1.getCards().size());
-        Assert.assertEquals(3, bot2.getCards().size());
-        Assert.assertEquals(3, bot3.getCards().size());
-        Assert.assertEquals(bot2, game.getCurrentPlayer());
-        Assert.assertEquals(SKIP, game.getDiscardPile().getValue());
-        Assert.assertEquals(RED, game.getDiscardPile().getColor());
+        assertEquals(2, player.getCards().size());
+        assertEquals(3, bot1.getCards().size());
+        assertEquals(3, bot2.getCards().size());
+        assertEquals(3, bot3.getCards().size());
+        assertEquals(bot2, game.getCurrentPlayer());
+        assertEquals(SKIP, game.getDiscardPile().getValue());
+        assertEquals(RED, game.getDiscardPile().getColor());
 
         /* Bot2 will play the [reverse, red].
            So bot 1 will be in line.
@@ -100,14 +101,14 @@ public class BotServiceTest extends ApplicationTest {
            Cards of bot2: [reverse, blue], [8, red]
            Cards of bot3: [0, yellow], [8, red], [8, red]*/
         sleep(2010);
-        Assert.assertEquals(2, player.getCards().size());
-        Assert.assertEquals(3, bot1.getCards().size());
-        Assert.assertEquals(2, bot2.getCards().size());
-        Assert.assertEquals(3, bot3.getCards().size());
-        Assert.assertEquals(bot1, game.getCurrentPlayer());
-        Assert.assertEquals(REVERSE, game.getDiscardPile().getValue());
-        Assert.assertEquals(RED, game.getDiscardPile().getColor());
-        Assert.assertEquals(COUNTER_CLOCKWISE, game.getDirection());
+        assertEquals(2, player.getCards().size());
+        assertEquals(3, bot1.getCards().size());
+        assertEquals(2, bot2.getCards().size());
+        assertEquals(3, bot3.getCards().size());
+        assertEquals(bot1, game.getCurrentPlayer());
+        assertEquals(REVERSE, game.getDiscardPile().getValue());
+        assertEquals(RED, game.getDiscardPile().getColor());
+        assertEquals(COUNTER_CLOCKWISE, game.getDirection());
 
         /* Bot1 cannot play a card, so it draws one. It is a [7, blue] which also cannot be played.
            So the player will be in line.
@@ -117,15 +118,15 @@ public class BotServiceTest extends ApplicationTest {
            Cards of bot2: [reverse, blue], [8, red]
            Cards of bot3: [0, yellow], [8, red], [8, red]*/
         sleep(2010);
-        Assert.assertEquals(2, player.getCards().size());
-        Assert.assertEquals(4, bot1.getCards().size());
-        Assert.assertEquals(2, bot2.getCards().size());
-        Assert.assertEquals(3, bot3.getCards().size());
-        Assert.assertEquals(player, game.getCurrentPlayer());
-        Assert.assertEquals(REVERSE, game.getDiscardPile().getValue());
-        Assert.assertEquals(RED, game.getDiscardPile().getColor());
-        Assert.assertEquals(SEVEN, bot1.getCards().get(3).getValue());
-        Assert.assertEquals(BLUE, bot1.getCards().get(3).getColor());
+        assertEquals(2, player.getCards().size());
+        assertEquals(4, bot1.getCards().size());
+        assertEquals(2, bot2.getCards().size());
+        assertEquals(3, bot3.getCards().size());
+        assertEquals(player, game.getCurrentPlayer());
+        assertEquals(REVERSE, game.getDiscardPile().getValue());
+        assertEquals(RED, game.getDiscardPile().getColor());
+        assertEquals(SEVEN, bot1.getCards().get(3).getValue());
+        assertEquals(BLUE, bot1.getCards().get(3).getColor());
     }
 
 

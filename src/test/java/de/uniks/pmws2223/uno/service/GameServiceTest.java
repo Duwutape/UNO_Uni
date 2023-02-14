@@ -9,6 +9,7 @@ import org.junit.Test;
 import java.util.List;
 
 import static de.uniks.pmws2223.uno.Constants.*;
+import static org.junit.Assert.assertEquals;
 
 public class GameServiceTest {
 
@@ -28,11 +29,11 @@ public class GameServiceTest {
         Card card1 = new Card(THREE, RED);
         player.withCards(card1);
 
-        Assert.assertEquals(List.of(card1), player.getCards());
+        assertEquals(List.of(card1), player.getCards());
         gameService.playCard(card1);
-        Assert.assertEquals(List.of(), player.getCards());
-        Assert.assertEquals(THREE, game.getDiscardPile().getValue());
-        Assert.assertEquals(RED, game.getDiscardPile().getColor());
+        assertEquals(List.of(), player.getCards());
+        assertEquals(THREE, game.getDiscardPile().getValue());
+        assertEquals(RED, game.getDiscardPile().getColor());
 
         /* Before playing the card the player should have one card on their hand.
            The card should be played because the color matches with the card on the discard pile.
@@ -41,11 +42,11 @@ public class GameServiceTest {
         Card card2 = new Card(ONE, RED);
         player.withCards(card2);
 
-        Assert.assertEquals(List.of(card2), player.getCards());
+        assertEquals(List.of(card2), player.getCards());
         gameService.playCard(card2);
-        Assert.assertEquals(List.of(), player.getCards());
-        Assert.assertEquals(ONE, game.getDiscardPile().getValue());
-        Assert.assertEquals(RED, game.getDiscardPile().getColor());
+        assertEquals(List.of(), player.getCards());
+        assertEquals(ONE, game.getDiscardPile().getValue());
+        assertEquals(RED, game.getDiscardPile().getColor());
 
         /* Before playing the card the player should have one card on their hand.
            The card should not be played because neither the color nor the value matches with the
@@ -55,11 +56,11 @@ public class GameServiceTest {
         Card card3 = new Card(NINE, GREEN);
         player.withCards(card3);
 
-        Assert.assertEquals(List.of(card3), player.getCards());
+        assertEquals(List.of(card3), player.getCards());
         gameService.playCard(card3);
-        Assert.assertEquals(List.of(card3), player.getCards());
-        Assert.assertEquals(ONE, game.getDiscardPile().getValue());
-        Assert.assertEquals(RED, game.getDiscardPile().getColor());
+        assertEquals(List.of(card3), player.getCards());
+        assertEquals(ONE, game.getDiscardPile().getValue());
+        assertEquals(RED, game.getDiscardPile().getColor());
     }
 
     @Test
@@ -78,14 +79,14 @@ public class GameServiceTest {
         Card card2 = new Card(EIGHT, RED);
         player.withCards(card1, card2);
 
-        Assert.assertEquals(List.of(card1, card2), player.getCards());
-        Assert.assertEquals(List.of(), bot1.getCards());
-        Assert.assertEquals(List.of(), bot2.getCards());
+        assertEquals(List.of(card1, card2), player.getCards());
+        assertEquals(List.of(), bot1.getCards());
+        assertEquals(List.of(), bot2.getCards());
         gameService.playCard(card1);
-        Assert.assertEquals(List.of(card2), player.getCards());
-        Assert.assertEquals(2, bot1.getCards().size());
-        Assert.assertEquals(List.of(), bot2.getCards());
-        Assert.assertEquals(bot2, game.getCurrentPlayer());
+        assertEquals(List.of(card2), player.getCards());
+        assertEquals(2, bot1.getCards().size());
+        assertEquals(List.of(), bot2.getCards());
+        assertEquals(bot2, game.getCurrentPlayer());
     }
 
     @Test
@@ -102,11 +103,11 @@ public class GameServiceTest {
         Card card2 = new Card(EIGHT, RED);
         player.withCards(card1, card2);
 
-        Assert.assertEquals(List.of(card1, card2), player.getCards());
+        assertEquals(List.of(card1, card2), player.getCards());
         gameService.playCard(card1);
-        Assert.assertEquals(List.of(card2), player.getCards());
-        Assert.assertEquals(bot2, game.getCurrentPlayer());
-        Assert.assertEquals(COUNTER_CLOCKWISE, game.getDirection());
+        assertEquals(List.of(card2), player.getCards());
+        assertEquals(bot2, game.getCurrentPlayer());
+        assertEquals(COUNTER_CLOCKWISE, game.getDirection());
 
         /* Now the player is in turn again and plays another reverse card.
            Before playing the card the player should have two cards on their hand.
@@ -116,11 +117,11 @@ public class GameServiceTest {
         Card card3 = new Card(REVERSE, YELLOW);
         player.withCards(card3);
 
-        Assert.assertEquals(List.of(card2, card3), player.getCards());
+        assertEquals(List.of(card2, card3), player.getCards());
         gameService.playCard(card3);
-        Assert.assertEquals(List.of(card2), player.getCards());
-        Assert.assertEquals(bot1, game.getCurrentPlayer());
-        Assert.assertEquals(CLOCKWISE, game.getDirection());
+        assertEquals(List.of(card2), player.getCards());
+        assertEquals(bot1, game.getCurrentPlayer());
+        assertEquals(CLOCKWISE, game.getDirection());
     }
 
     @Test
@@ -139,12 +140,12 @@ public class GameServiceTest {
         Card card2 = new Card(EIGHT, RED);
         player.withCards(card1, card2);
 
-        Assert.assertEquals(List.of(card1, card2), player.getCards());
-        Assert.assertEquals(List.of(), bot1.getCards());
-        Assert.assertEquals(List.of(), bot1.getCards());
+        assertEquals(List.of(card1, card2), player.getCards());
+        assertEquals(List.of(), bot1.getCards());
+        assertEquals(List.of(), bot1.getCards());
         gameService.playCard(card1);
-        Assert.assertEquals(List.of(card2), player.getCards());
-        Assert.assertEquals(bot2, game.getCurrentPlayer());
+        assertEquals(List.of(card2), player.getCards());
+        assertEquals(bot2, game.getCurrentPlayer());
     }
 
     @Test
@@ -163,14 +164,14 @@ public class GameServiceTest {
         Card card2 = new Card(EIGHT, RED);
         player.withCards(card1, card2);
 
-        Assert.assertEquals(List.of(card1, card2), player.getCards());
+        assertEquals(List.of(card1, card2), player.getCards());
         gameService.playCard(card1);
-        Assert.assertEquals(List.of(card2), player.getCards());
-        Assert.assertEquals(WILD, game.getDiscardPile().getValue());
-        Assert.assertEquals(BLACK, game.getDiscardPile().getColor());
+        assertEquals(List.of(card2), player.getCards());
+        assertEquals(WILD, game.getDiscardPile().getValue());
+        assertEquals(BLACK, game.getDiscardPile().getColor());
         game.setDiscardPile(new Card(WILD, RED));
-        Assert.assertEquals(WILD, game.getDiscardPile().getValue());
-        Assert.assertEquals(RED, game.getDiscardPile().getColor());
+        assertEquals(WILD, game.getDiscardPile().getValue());
+        assertEquals(RED, game.getDiscardPile().getColor());
 
         /* Now this test will be repeated three times to test that a black card can be played on every other
            card.
@@ -178,39 +179,56 @@ public class GameServiceTest {
         Card card3 = new Card(WILD, BLACK);
         player.withCards(card3);
 
-        Assert.assertEquals(List.of(card2, card3), player.getCards());
+        assertEquals(List.of(card2, card3), player.getCards());
         gameService.playCard(card3);
-        Assert.assertEquals(List.of(card2), player.getCards());
-        Assert.assertEquals(WILD, game.getDiscardPile().getValue());
-        Assert.assertEquals(BLACK, game.getDiscardPile().getColor());
+        assertEquals(List.of(card2), player.getCards());
+        assertEquals(WILD, game.getDiscardPile().getValue());
+        assertEquals(BLACK, game.getDiscardPile().getColor());
         game.setDiscardPile(new Card(WILD, GREEN));
-        Assert.assertEquals(WILD, game.getDiscardPile().getValue());
-        Assert.assertEquals(GREEN, game.getDiscardPile().getColor());
+        assertEquals(WILD, game.getDiscardPile().getValue());
+        assertEquals(GREEN, game.getDiscardPile().getColor());
 
         /* Now it will be played on a green card.*/
         Card card4 = new Card(WILD, BLACK);
         player.withCards(card4);
 
-        Assert.assertEquals(List.of(card2, card4), player.getCards());
+        assertEquals(List.of(card2, card4), player.getCards());
         gameService.playCard(card4);
-        Assert.assertEquals(List.of(card2), player.getCards());
-        Assert.assertEquals(WILD, game.getDiscardPile().getValue());
-        Assert.assertEquals(BLACK, game.getDiscardPile().getColor());
+        assertEquals(List.of(card2), player.getCards());
+        assertEquals(WILD, game.getDiscardPile().getValue());
+        assertEquals(BLACK, game.getDiscardPile().getColor());
         game.setDiscardPile(new Card(WILD, BLUE));
-        Assert.assertEquals(WILD, game.getDiscardPile().getValue());
-        Assert.assertEquals(BLUE, game.getDiscardPile().getColor());
+        assertEquals(WILD, game.getDiscardPile().getValue());
+        assertEquals(BLUE, game.getDiscardPile().getColor());
 
         /* At last, it will be played on a blue card.*/
         Card card5 = new Card(WILD, BLACK);
         player.withCards(card5);
 
-        Assert.assertEquals(List.of(card2, card5), player.getCards());
-        gameService.playCard(card1);
-        Assert.assertEquals(List.of(card2), player.getCards());
-        Assert.assertEquals(WILD, game.getDiscardPile().getValue());
-        Assert.assertEquals(BLACK, game.getDiscardPile().getColor());
+        assertEquals(List.of(card2, card5), player.getCards());
+        gameService.playCard(card5);
+        assertEquals(List.of(card2), player.getCards());
+        assertEquals(WILD, game.getDiscardPile().getValue());
+        assertEquals(BLACK, game.getDiscardPile().getColor());
         game.setDiscardPile(new Card(WILD, BLUE));
-        Assert.assertEquals(WILD, game.getDiscardPile().getValue());
-        Assert.assertEquals(BLUE, game.getDiscardPile().getColor());
+        assertEquals(WILD, game.getDiscardPile().getValue());
+        assertEquals(BLUE, game.getDiscardPile().getColor());
+    }
+
+    @Test
+    public void winGame() {
+        Player player = new Player().setGame(game);
+        game.setDiscardPile(new Card(THREE, YELLOW)).setCurrentPlayer(player);
+
+        /* Before playing the card the player should have one card on their hand.
+           After playing the card the player does not have any more cards and wins
+           the game. */
+        Card card1 = new Card(THREE, RED);
+        player.withCards(card1);
+
+        assertEquals(List.of(card1), player.getCards());
+        gameService.playCard(card1);
+        assertEquals(List.of(), player.getCards());
+        assertEquals(player, game.getHasWon());
     }
 }

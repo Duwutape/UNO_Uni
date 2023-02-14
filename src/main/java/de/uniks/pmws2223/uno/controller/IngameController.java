@@ -213,6 +213,7 @@ public class IngameController implements Controller {
             button.setPrefWidth(66);
             button.setPrefHeight(100);
             button.setId("card" + counter);
+            counter++;
             button.setText(card.getValue());
 
             switch (card.getColor()) {

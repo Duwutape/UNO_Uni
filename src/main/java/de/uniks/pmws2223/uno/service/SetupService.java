@@ -1,5 +1,6 @@
 package de.uniks.pmws2223.uno.service;
 
+import de.uniks.pmws2223.uno.model.Card;
 import de.uniks.pmws2223.uno.model.Game;
 import de.uniks.pmws2223.uno.model.Player;
 
@@ -13,6 +14,11 @@ public class SetupService {
                 .withPlayers(player)
                 .setDiscardPile(randomService.createCard())
                 .setDirection(CLOCKWISE);
+
+        if (game.getDiscardPile().getColor().equals(BLACK)) {
+            int color = randomService.chooseColor();
+            game.setDiscardPile(new Card(WILD, COLORS.get(color)));
+        }
 
         for (int i = 0; i < numberBots; i++) {
             new Player().setName("bot" + i)

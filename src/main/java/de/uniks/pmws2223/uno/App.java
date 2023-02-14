@@ -29,11 +29,21 @@ public class App extends Application {
     public void show(Controller controller) {
         controller.init();
         try {
-            if(controller.getTitle().equals("UNO - Ingame")){
-                stage.setWidth(1240);
+            if (controller.getTitle().equals("UNO - Setup")) {
+                stage.setWidth(270);
+                stage.setHeight(353);
+                stage.centerOnScreen();
+            } else if (controller.getTitle().equals("UNO - Ingame")) {
+                stage.setWidth(990);
                 stage.setHeight(840);
+                stage.centerOnScreen();
+            } else if (controller.getTitle().equals("UNO - GameOver")) {
+                stage.setWidth(209);
+                stage.setHeight(248);
+                stage.centerOnScreen();
             }
 
+            stage.setResizable(false);
             stage.getScene().setRoot(controller.render());
         } catch (IOException ex) {
             ex.printStackTrace();

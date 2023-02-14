@@ -34,8 +34,6 @@ public class GenModel implements ClassModelDecorator {
     class Card {
         String value;
         String color;
-        List<String> canPlayedAt;
-        List<String> canReceive;
 
         @Link("discardPile")
         Game game;

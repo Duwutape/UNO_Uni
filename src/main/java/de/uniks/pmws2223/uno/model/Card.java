@@ -11,15 +11,11 @@ public class Card
 {
    public static final String PROPERTY_VALUE = "value";
    public static final String PROPERTY_COLOR = "color";
-   public static final String PROPERTY_CAN_PLAYED_AT = "canPlayedAt";
-   public static final String PROPERTY_CAN_RECEIVE = "canReceive";
    public static final String PROPERTY_GAME = "game";
    public static final String PROPERTY_PLAYER = "player";
    private String value;
    private String color;
-   private List<String> canPlayedAt;
    protected PropertyChangeSupport listeners;
-   private List<String> canReceive;
    private Game game;
    private Player player;
 
@@ -61,132 +57,6 @@ public class Card
       final String oldValue = this.color;
       this.color = value;
       this.firePropertyChange(PROPERTY_COLOR, oldValue, value);
-      return this;
-   }
-
-   public List<String> getCanPlayedAt()
-   {
-      return this.canPlayedAt != null ? Collections.unmodifiableList(this.canPlayedAt) : Collections.emptyList();
-   }
-
-   public Card withCanPlayedAt(String value)
-   {
-      if (this.canPlayedAt == null)
-      {
-         this.canPlayedAt = new ArrayList<>();
-      }
-      if (this.canPlayedAt.add(value))
-      {
-         this.firePropertyChange(PROPERTY_CAN_PLAYED_AT, null, value);
-      }
-      return this;
-   }
-
-   public Card withCanPlayedAt(String... value)
-   {
-      for (final String item : value)
-      {
-         this.withCanPlayedAt(item);
-      }
-      return this;
-   }
-
-   public Card withCanPlayedAt(Collection<? extends String> value)
-   {
-      for (final String item : value)
-      {
-         this.withCanPlayedAt(item);
-      }
-      return this;
-   }
-
-   public Card withoutCanPlayedAt(String value)
-   {
-      if (this.canPlayedAt != null && this.canPlayedAt.removeAll(Collections.singleton(value)))
-      {
-         this.firePropertyChange(PROPERTY_CAN_PLAYED_AT, value, null);
-      }
-      return this;
-   }
-
-   public Card withoutCanPlayedAt(String... value)
-   {
-      for (final String item : value)
-      {
-         this.withoutCanPlayedAt(item);
-      }
-      return this;
-   }
-
-   public Card withoutCanPlayedAt(Collection<? extends String> value)
-   {
-      for (final String item : value)
-      {
-         this.withoutCanPlayedAt(item);
-      }
-      return this;
-   }
-
-   public List<String> getCanReceive()
-   {
-      return this.canReceive != null ? Collections.unmodifiableList(this.canReceive) : Collections.emptyList();
-   }
-
-   public Card withCanReceive(String value)
-   {
-      if (this.canReceive == null)
-      {
-         this.canReceive = new ArrayList<>();
-      }
-      if (this.canReceive.add(value))
-      {
-         this.firePropertyChange(PROPERTY_CAN_RECEIVE, null, value);
-      }
-      return this;
-   }
-
-   public Card withCanReceive(String... value)
-   {
-      for (final String item : value)
-      {
-         this.withCanReceive(item);
-      }
-      return this;
-   }
-
-   public Card withCanReceive(Collection<? extends String> value)
-   {
-      for (final String item : value)
-      {
-         this.withCanReceive(item);
-      }
-      return this;
-   }
-
-   public Card withoutCanReceive(String value)
-   {
-      if (this.canReceive != null && this.canReceive.removeAll(Collections.singleton(value)))
-      {
-         this.firePropertyChange(PROPERTY_CAN_RECEIVE, value, null);
-      }
-      return this;
-   }
-
-   public Card withoutCanReceive(String... value)
-   {
-      for (final String item : value)
-      {
-         this.withoutCanReceive(item);
-      }
-      return this;
-   }
-
-   public Card withoutCanReceive(Collection<? extends String> value)
-   {
-      for (final String item : value)
-      {
-         this.withoutCanReceive(item);
-      }
       return this;
    }
 
@@ -269,8 +139,6 @@ public class Card
       final StringBuilder result = new StringBuilder();
       result.append(' ').append(this.getValue());
       result.append(' ').append(this.getColor());
-      result.append(' ').append(this.getCanPlayedAt());
-      result.append(' ').append(this.getCanReceive());
       return result.substring(1);
    }
 

@@ -8,7 +8,7 @@
   packageSrcFolder: 	"src/main/java/de/uniks/pmws2223/uno/model"
 
 - card: 	org.fulib.classmodel.Clazz
-  attributes: 	card_value 	card_color 	card_canPlayedAt 	card_canReceive
+  attributes: 	card_value 	card_color
   model: 	c
   modified: 	false
   name: 	Card
@@ -52,26 +52,6 @@
   id: 	Card_color
   modified: 	false
   name: 	color
-  propertyStyle: 	Bean
-  type: 	String
-  typeSignature: 	String
-
-- card_canPlayedAt: 	org.fulib.classmodel.Attribute
-  clazz: 	card
-  collectionType: 	c1
-  id: 	Card_canPlayedAt
-  modified: 	false
-  name: 	canPlayedAt
-  propertyStyle: 	Bean
-  type: 	String
-  typeSignature: 	String
-
-- card_canReceive: 	org.fulib.classmodel.Attribute
-  clazz: 	card
-  collectionType: 	c1
-  id: 	Card_canReceive
-  modified: 	false
-  name: 	canReceive
   propertyStyle: 	Bean
   type: 	String
   typeSignature: 	String

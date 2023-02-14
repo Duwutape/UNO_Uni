@@ -30,7 +30,7 @@ public class App extends Application {
         try {
             if (controller.getTitle().equals("UNO - Setup")) {
                 stage.setWidth(270);
-                stage.setHeight(353);
+                stage.setHeight(393);
                 stage.centerOnScreen();
             } else if (controller.getTitle().equals("UNO - Ingame")) {
                 stage.setWidth(990);
@@ -39,6 +39,10 @@ public class App extends Application {
             } else if (controller.getTitle().equals("UNO - GameOver")) {
                 stage.setWidth(209);
                 stage.setHeight(248);
+                stage.centerOnScreen();
+            } else if (controller.getTitle().equals("UNO - How to play")){
+                stage.setWidth(782);
+                stage.setHeight(463);
                 stage.centerOnScreen();
             }
 

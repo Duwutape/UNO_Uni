@@ -39,14 +39,20 @@ public class SetupController implements Controller {
     @Override
     public Parent render() throws IOException {
         // load fxml
+        //TODO backgorund
         Parent parent = FXMLLoader.load(Main.class.getResource("view/Setup.fxml"));
 
         // lookup content
         TextField nameField = (TextField) parent.lookup("#nameField");
         Slider botSelector = (Slider) parent.lookup("#botSelector");
+        Button tutorialButton = (Button) parent.lookup("#howToPlayButton");
         Button startButton = (Button) parent.lookup("#startButton");
 
-        // set action of button
+        // set action of buttons
+        tutorialButton.setOnAction(action ->{
+            app.show(new HowToPlayController(app));
+        });
+
         startButton.setOnAction(action -> {
             final PlayerService playerService = new PlayerService();
             Player player = playerService.createPlayer(nameField.getText()).setType(HUMAN);

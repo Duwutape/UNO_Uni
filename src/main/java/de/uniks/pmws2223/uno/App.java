@@ -19,7 +19,6 @@ public class App extends Application {
         primaryStage.setScene(new Scene(new Label("Loading...")));
         primaryStage.setTitle("Uno");
 
-        // TODO show initial controller
         show(new SetupController(this));
         primaryStage.show();
 

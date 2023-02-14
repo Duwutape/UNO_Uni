@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<VBox xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
          <children>
@@ -20,11 +20,11 @@
             <Label layoutY="37.0" text="The game is played according to the official basic uno rules. You can read them here:" />
             <Label layoutY="59.0" text="There are some exceptions:" />
             <Label layoutX="150.0" layoutY="59.0" text="- The human player will start every game" />
-            <Label layoutX="150.0" layoutY="73.0" text="- There is no &quot;wild draw four&quot; card in game" />
+            <Label layoutX="150.0" layoutY="73.0" text="- There is no wild draw four card in game" />
             <Label layoutX="150.0" layoutY="87.0" text="- Action cards can be played on top of each other but the action is not stackable" />
-            <Label layoutX="150.0" layoutY="101.0" text="- You can play a &quot;wild&quot; card on a &quot;wild&quot; card" />
+            <Label layoutX="150.0" layoutY="101.0" text="- You can play a wild card on a wild card" />
             <Label layoutX="150.0" layoutY="115.0" text="- If the first card of a game is a action card, the action will not be performed" />
-            <Label layoutX="150.0" layoutY="128.0" text="- If the first card of a game is a &quot;wild&quot; card a random color will be picked" />
+            <Label layoutX="150.0" layoutY="128.0" text="- If the first card of a game is a wild card a random color will be picked" />
             <Label layoutY="160.0" text="How to play:" underline="true">
                <font>
                   <Font name="System Bold" size="18.0" />
@@ -32,30 +32,20 @@
             </Label>
             <Label layoutY="197.0" text="When it is your turn click on a card in your deck to play it. If you do not have a playable card draw a card by clicking on the Draw Pile." />
             <Label layoutY="211.0" text="After you draw a card you can play it when possible. If not it is not possible or you want to keep the card you have to click the" />
-            <Label layoutY="225.0" text="&quot;Skip turn&quot; button which will appear after drawing a card." />
+            <Label layoutY="225.0" text="Skip turn button which will appear after drawing a card." />
             <Label layoutY="239.0" text="If you have to draw two cards the game automatically gives you them." />
-            <Label layoutY="256.0" text="After playing a &quot;wild&quot; card buttons to choose a color will appear. Click on the color with which the game sould continue." />
-            <Label layoutY="338.0" text="This program was developed by Daniel Langheld in the context of the &quot;Programmierung und Modelierung&quot; lecture at Universty">
+            <Label layoutY="253.0" text="After playing a wild card buttons to choose a color will appear. Click on the color with which the game should continue." />
+            <Label layoutY="267.0" text="The leave button will bring you back to the menu. The process of the game will be lost." />
+            <Label layoutY="338.0" text="This program was created by Daniel Langheld in the context of the &quot;Programmierung und Modelierung&quot; lecture">
                <font>
                   <Font size="11.0" />
                </font>
             </Label>
-            <Label layoutY="351.0" text="of Kassel in winter term 22/23">
+            <Label layoutY="351.0" text="at Universtyof Kassel in winter term 22/23">
                <font>
                   <Font size="11.0" />
                </font>
             </Label>
-            <Label layoutY="367.0" text="My Github page:">
-               <font>
-                  <Font size="11.0" />
-               </font>
-            </Label>
-            <Label layoutY="380.0" text="Website of the Research Group Software Engineering at University of Kassel:">
-               <font>
-                  <Font size="11.0" />
-               </font>
-            </Label>
-            <Label layoutX="10.0" layoutY="47.0" text="The game is played dccording to the official basic uno rules. You can read them here:" />
          </children>
          <VBox.margin>
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />

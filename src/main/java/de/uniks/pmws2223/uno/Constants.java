@@ -21,10 +21,6 @@ public class Constants {
     public static final String CLARKE = "Clark";
     public static final List<String> NAMES = List.of(RAVEN, STORM, CLARKE);
 
-    // botBox numbers
-    public static final int BOT_BOX_ZERO = 0;
-    public static final int BOT_BOX_ONE = 1;
-    public static final int BOT_BOX_TWO = 2;
 
     // styles
     public static final String BACKGROUND_COLOR = "-fx-background-color: ";

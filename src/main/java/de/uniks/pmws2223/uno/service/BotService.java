@@ -8,18 +8,20 @@ import javafx.application.Platform;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import static de.uniks.pmws2223.uno.Constants.BLACK;
+import static de.uniks.pmws2223.uno.Constants.*;
 
 public class BotService {
     private final Game game;
     private final Player currentPlayer;
+    private final RandomService randomService;
     private final GameService gameService;
     private boolean playedCard = false;
 
-    public BotService(Game game, Player currentPlayer) {
+    public BotService(RandomService randomService, Game game, Player currentPlayer) {
         this.game = game;
         this.currentPlayer = currentPlayer;
-        this.gameService = new GameService(game);
+        this.randomService = randomService;
+        this.gameService = new GameService(randomService, game);
     }
 
     public void playWithDelay() {
@@ -56,6 +58,11 @@ public class BotService {
                     || card.getColor().equals(game.getDiscardPile().getColor())
                     || card.getColor().equals(BLACK)) {
                 gameService.playCard(card);
+
+                if(card.getValue().equals(WILD)){
+                    int color = randomService.chooseColor();
+                    game.setDiscardPile(new Card(WILD,COLORS.get(color)));
+                }
                 playedCard = true;
             }
         }

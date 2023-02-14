@@ -18,4 +18,8 @@ public class RandomService {
         }
         return new Card(VALUES.get(value), COLORS.get(color));
     }
+
+    public int chooseColor() {
+        return random.nextInt(0, 4);
+    }
 }

@@ -10,10 +10,11 @@ import static de.uniks.pmws2223.uno.Constants.*;
 
 public class GameService {
 
-    private final RandomService randomService = new RandomService();
-    private Game game;
+    private final RandomService randomService;
+    private final Game game;
 
-    public GameService(Game game) {
+    public GameService(RandomService randomService, Game game) {
+        this.randomService = randomService;
         this.game = game;
     }
 
@@ -102,7 +103,7 @@ public class GameService {
 
     public void endTurn() {
         if (game.getCurrentPlayer().getType().equals(BOT)) {
-            final BotService botService = new BotService(game, game.getCurrentPlayer());
+            final BotService botService = new BotService(randomService, game, game.getCurrentPlayer());
             botService.playWithDelay();
         }
     }

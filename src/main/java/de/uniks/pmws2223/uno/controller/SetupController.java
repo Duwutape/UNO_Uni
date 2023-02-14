@@ -55,7 +55,7 @@ public class SetupController implements Controller {
             final RandomService randomService = new RandomService();
             Game game = setupService.createGame(randomService, player, (int) botSelector.getValue());
 
-            final GameService gameService = new GameService(game);
+            final GameService gameService = new GameService(randomService, game);
             app.show(new IngameController(app, gameService, randomService, game));
         });
         return parent;

@@ -2,10 +2,9 @@ package de.uniks.pmws2223.uno.controller;
 
 import de.uniks.pmws2223.uno.App;
 import de.uniks.pmws2223.uno.Main;
-import de.uniks.pmws2223.uno.model.Card;
 import de.uniks.pmws2223.uno.model.Game;
 import de.uniks.pmws2223.uno.model.Player;
-import de.uniks.pmws2223.uno.service.CardService;
+import de.uniks.pmws2223.uno.service.RandomService;
 import de.uniks.pmws2223.uno.service.GameService;
 import de.uniks.pmws2223.uno.service.PlayerService;
 import de.uniks.pmws2223.uno.service.SetupService;
@@ -53,11 +52,11 @@ public class SetupController implements Controller {
             Player player = playerService.createPlayer(nameField.getText()).setType(HUMAN);
 
             final SetupService setupService = new SetupService();
-            final CardService cardService = new CardService();
-            Game game = setupService.createGame(cardService, player, (int) botSelector.getValue());
+            final RandomService randomService = new RandomService();
+            Game game = setupService.createGame(randomService, player, (int) botSelector.getValue());
 
             final GameService gameService = new GameService(game);
-            app.show(new IngameController(app, gameService, cardService, game));
+            app.show(new IngameController(app, gameService, randomService, game));
         });
         return parent;
     }

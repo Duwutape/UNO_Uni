@@ -5,7 +5,7 @@ import de.uniks.pmws2223.uno.Main;
 import de.uniks.pmws2223.uno.model.Card;
 import de.uniks.pmws2223.uno.model.Game;
 import de.uniks.pmws2223.uno.model.Player;
-import de.uniks.pmws2223.uno.service.CardService;
+import de.uniks.pmws2223.uno.service.RandomService;
 import de.uniks.pmws2223.uno.service.GameService;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
@@ -25,7 +25,7 @@ import static de.uniks.pmws2223.uno.Constants.*;
 
 public class IngameController implements Controller {
     private final GameService gameService;
-    private final CardService cardService;
+    private final RandomService randomService;
     private final App app;
     private final Game game;
     private Player player;
@@ -41,10 +41,10 @@ public class IngameController implements Controller {
     private PropertyChangeListener hasWonListener;
     private PropertyChangeListener currentPlayerListener;
 
-    public IngameController(App app, GameService gameService, CardService cardService, Game game) {
+    public IngameController(App app, GameService gameService, RandomService randomService, Game game) {
         this.app = app;
         this.gameService = gameService;
-        this.cardService = cardService;
+        this.randomService = randomService;
         this.game = game;
         for (Player player : game.getPlayers()) {
             if (player.getType().equals(HUMAN)) {

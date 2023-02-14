@@ -10,7 +10,7 @@ import static de.uniks.pmws2223.uno.Constants.*;
 
 public class GameService {
 
-    private final CardService cardService = new CardService();
+    private final RandomService randomService = new RandomService();
     private Game game;
 
     public GameService(Game game) {
@@ -34,7 +34,9 @@ public class GameService {
                 switch (card.getValue()) {
                     case REVERSE -> {
                         setDirection();
-                        nextPlayer();
+                        if (game.getPlayers().size() >= 3) {
+                            nextPlayer();
+                        }
                         endTurn();
                     }
                     case SKIP -> {
@@ -57,7 +59,7 @@ public class GameService {
     }
 
     public Card drawCard() {
-        return cardService.createCard();
+        return randomService.createCard();
     }
 
     public void drawCard(Player player) {

@@ -26,7 +26,6 @@ public class GameService {
 
             game.setDiscardPile(card);
             card.getPlayer().withoutCards(card);
-            System.out.println(game.getCurrentPlayer().getCards().size());
 
             if (game.getCurrentPlayer().getCards().size() == 0) {
                 game.setHasWon(game.getCurrentPlayer());

@@ -58,7 +58,7 @@ public class Constants {
     public static final String NINE = "9";
     public static final String REVERSE = "reverse";
     public static final String SKIP = "skip";
-    public static final String DRAW = "draw";
+    public static final String DRAW = "+2";
     public static final String WILD = "wild";
     public static final List<String> VALUES = List.of(ZERO, ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, REVERSE, SKIP, DRAW, WILD);
 

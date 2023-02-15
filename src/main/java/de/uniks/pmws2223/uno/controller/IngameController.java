@@ -166,7 +166,7 @@ public class IngameController implements Controller {
             gameService.endTurn();
         });
         blue.setOnAction(event -> {
-            game.setDiscardPile(new Card(WILD, BLACK));
+            game.setDiscardPile(new Card(WILD, BLUE));
             buttonDisplay(false);
             gameService.nextPlayer();
             gameService.endTurn();

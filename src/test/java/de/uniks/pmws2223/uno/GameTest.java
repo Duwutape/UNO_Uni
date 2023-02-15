@@ -114,8 +114,6 @@ public class GameTest extends ApplicationTest {
         // player cannot play a card, so they have to draw one
         clickOn("#drawPileButton");
 
-        // check if skip button appears
-        assertTrue(lookup("#skipTurnButton").query().isVisible());
 
         // check discard pile, player cards and current player
         assertEquals(EIGHT, lookup("#discardValueLabel").queryLabeled().getText());
@@ -125,12 +123,9 @@ public class GameTest extends ApplicationTest {
         assertEquals(FIVE, lookup("#card3").queryLabeled().getText());
         assertEquals(FIVE, lookup("#card4").queryLabeled().getText());
         assertEquals(REVERSE, lookup("#card5").queryLabeled().getText());
-        verifyThat("#turnLabel", hasText("Ash"));
 
-        // player still cannot play, so click skipTurnButton
-        // check if button disappears and current player
-        clickOn("#skipTurnButton");
-        assertFalse(lookup("#skipTurnButton").query().isVisible());
+        // player still cannot play, so next player is in turn
+        // check current player
         verifyThat("#turnLabel", hasText(CLARKE));
         sleep(WAIT_TIME);
 
@@ -148,6 +143,7 @@ public class GameTest extends ApplicationTest {
 
         // bot0 plays 8
         // check discard pile and current player
+        sleep(500);
         assertEquals(EIGHT, lookup("#discardValueLabel").queryLabeled().getText());
         verifyThat("#turnLabel", hasText("Ash"));
         sleep(WAIT_TIME);
@@ -165,12 +161,9 @@ public class GameTest extends ApplicationTest {
         assertEquals(FIVE, lookup("#card4").queryLabeled().getText());
         assertEquals(REVERSE, lookup("#card5").queryLabeled().getText());
         assertEquals(NINE, lookup("#card6").queryLabeled().getText());
-        verifyThat("#turnLabel", hasText("Ash"));
 
-        // player still cannot play, so click skipTurnButton
-        // check if button disappears and current player
-        clickOn("#skipTurnButton");
-        assertFalse(lookup("#skipTurnButton").query().isVisible());
+        // player still cannot play, so next player is in turn
+        // check current player
         verifyThat("#turnLabel", hasText(CLARKE));
         sleep(WAIT_TIME);
 
@@ -182,6 +175,7 @@ public class GameTest extends ApplicationTest {
 
         // bot1 draws a card
         // check discard pile and current player
+        sleep(500);
         assertEquals(TWO, lookup("#discardValueLabel").queryLabeled().getText());
         verifyThat("#turnLabel", hasText(RAVEN));
         sleep(WAIT_TIME);

@@ -42,9 +42,10 @@ public class BotService {
 
         playCard();
         if (!playedCard) {
-            gameService.drawCard(currentPlayer);
-            playCard();
-            if (!playedCard) {
+            Card card = gameService.drawCard(currentPlayer);
+            if(gameService.checkPlayable(card)){
+                gameService.playCard(card);
+            } else {
                 gameService.nextPlayer();
                 gameService.endTurn();
             }

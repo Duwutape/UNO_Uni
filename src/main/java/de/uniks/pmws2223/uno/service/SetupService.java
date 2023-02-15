@@ -31,7 +31,6 @@ public class SetupService {
             for (int i = 1; i <= NUMBER_CARDS_START; i++) {
                 players.withCards(randomService.createCard());
             }
-
         }
 
         return game;

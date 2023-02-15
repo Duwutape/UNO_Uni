@@ -80,7 +80,7 @@ public class IngameController implements Controller {
         bot0Box = (HBox) parent.lookup("#bot0Box");
         bot1Box = (HBox) parent.lookup("#bot1Box");
         bot2Box = (HBox) parent.lookup("#bot2Box");
-        HBox playerCards = (HBox) parent.lookup("#cardBoxPlayer");
+        HBox playerCardBox = (HBox) parent.lookup("#cardBoxPlayer");
         Label playerName = (Label) parent.lookup("#namePlayerLabel");
         bot0Label = (Label) parent.lookup("#bot0Label");
         bot1Label = (Label) parent.lookup("#bot1Label");
@@ -127,28 +127,28 @@ public class IngameController implements Controller {
 
         // set player Content
         playerName.setAlignment(Pos.CENTER);
-        playerName.setText(this.player.getName());
-        renderPlayerCards(playerCards);
+        playerName.setText(player.getName());
+        renderPlayerCards(playerCardBox);
 
         // set listener for player cards
         playerCardsListener = event -> {
-            renderPlayerCards(playerCards);
+            renderPlayerCards(playerCardBox);
         };
-        this.player.listeners().addPropertyChangeListener(Player.PROPERTY_CARDS, playerCardsListener);
+        player.listeners().addPropertyChangeListener(Player.PROPERTY_CARDS, playerCardsListener);
 
         // set discard Pile
         discardValue.setAlignment(Pos.CENTER);
         discardValue.setText(game.getDiscardPile().getValue());
-        createStyle(discardColor, discardValue, game.getDiscardPile());
+        createDiscardStyle(discardColor, discardValue, game.getDiscardPile());
 
         // set listener for discard pile
         discardPileListener = event -> {
             if (event.getNewValue() != null) {
                 Card card = (Card) event.getNewValue();
                 discardValue.setText(card.getValue());
-                createStyle(discardColor, discardValue, card);
+                createDiscardStyle(discardColor, discardValue, card);
 
-                if (game.getCurrentPlayer().equals(this.player) && game.getDiscardPile().getColor().equals(BLACK)) {
+                if (game.getCurrentPlayer().equals(player) && game.getDiscardPile().getColor().equals(BLACK)) {
                     buttonDisplay(true);
                 }
             }
@@ -189,10 +189,17 @@ public class IngameController implements Controller {
 
         // set drawCardButton action
         drawCardButton.setOnAction(action -> {
-            if (game.getCurrentPlayer().equals(this.player)) {
-                this.player.withCards(gameService.drawCard());
-                drawCardButton.setDisable(true);
-                skipTurnButton.setVisible(true);
+            if (game.getCurrentPlayer().equals(player)) {
+                Card newCard = gameService.drawCard(player);
+
+                if (!gameService.checkPlayable(newCard)) {
+                    gameService.nextPlayer();
+                    gameService.endTurn();
+                } else {
+                    drawCardButton.setDisable(true);
+                    disableButtons(playerCardBox, newCard);
+                }
+
             }
         });
 
@@ -310,78 +317,107 @@ public class IngameController implements Controller {
         }
     }
 
-    private void renderPlayerCards(HBox playerCards) {
-        playerCards.getChildren().clear();
+    private void renderPlayerCards(HBox playerCardBox) {
+        playerCardBox.getChildren().clear();
 
         int counter = 0;
-        for (Card card : this.player.getCards()) {
-            Button button = new Button();
-            button.setPrefWidth(66);
-            button.setPrefHeight(100);
+        for (Card card : player.getCards()) {
+            Button button = createButton(card);
+
             button.setId("card" + counter);
             counter++;
-            button.setText(card.getValue());
 
-            switch (card.getColor()) {
-                case RED -> {
-                    button.setTextFill(Paint.valueOf(DISPLAY_BLACK));
-                    button.setStyle(BACKGROUND_RADIUS + RADIUS + "; "
-                            + BORDER_RADIUS + RADIUS + "; "
-                            + BACKGROUND_COLOR + DISPLAY_RED + "; "
-                            + BORDER_COLOR + BLACK + "; "
-                            + FONT_SIZE + SIZE_SMALL + ";"
-                            + FONT_WEIGHT + BOLD);
-                }
-                case BLUE -> {
-                    button.setTextFill(Paint.valueOf(DISPLAY_BLACK));
-                    button.setStyle(BACKGROUND_RADIUS + RADIUS + "; "
-                            + BORDER_RADIUS + RADIUS + "; "
-                            + BACKGROUND_COLOR + DISPLAY_BLUE + ";"
-                            + BORDER_COLOR + BLACK + "; "
-                            + FONT_SIZE + SIZE_SMALL + ";"
-                            + FONT_WEIGHT + BOLD);
-                }
-                case YELLOW -> {
-                    button.setTextFill(Paint.valueOf(DISPLAY_BLACK));
-                    button.setStyle(BACKGROUND_RADIUS + RADIUS + "; "
-                            + BORDER_RADIUS + RADIUS + "; "
-                            + BACKGROUND_COLOR + DISPLAY_YELLOW + ";"
-                            + BORDER_COLOR + BLACK + "; "
-                            + FONT_SIZE + SIZE_SMALL + ";"
-                            + FONT_WEIGHT + BOLD);
-                }
-                case GREEN -> {
-                    button.setTextFill(Paint.valueOf(DISPLAY_BLACK));
-                    button.setStyle(BACKGROUND_RADIUS + RADIUS + "; "
-                            + BORDER_RADIUS + RADIUS + "; "
-                            + BACKGROUND_COLOR + DISPLAY_GREEN + ";"
-                            + BORDER_COLOR + BLACK + "; "
-                            + FONT_SIZE + SIZE_SMALL + ";"
-                            + FONT_WEIGHT + BOLD);
-                }
-                case BLACK -> {
-                    button.setTextFill(Paint.valueOf(DISPLAY_WHITE));
-                    button.setStyle(BACKGROUND_RADIUS + RADIUS + "; "
-                            + BORDER_RADIUS + RADIUS + "; "
-                            + BACKGROUND_COLOR + DISPLAY_BLACK + ";"
-                            + BORDER_COLOR + BLACK + "; "
-                            + FONT_SIZE + SIZE_SMALL + ";"
-                            + FONT_WEIGHT + BOLD);
-                }
-            }
-
-            button.setOnAction(action -> {
-                if (game.getCurrentPlayer().getType().equals(HUMAN)) {
-                    gameService.playCard(card);
-                    skipTurnButton.setVisible(false);
-                    drawCardButton.setDisable(false);
-                }
-            });
-            playerCards.getChildren().add(button);
+            playerCardBox.getChildren().add(button);
         }
     }
 
-    private void createStyle(Pane discardColor, Label discardValue, Card card) {
+    private void disableButtons(HBox playerCardBox, Card newCard) {
+        playerCardBox.getChildren().clear();
+
+        int counter = 0;
+        for (Card card : player.getCards()) {
+            Button button = createButton(card);
+
+            button.setId("card" + counter);
+            counter++;
+
+            if (!card.equals(newCard)) {
+                button.setDisable(true);
+            }
+
+            playerCardBox.getChildren().add(button);
+        }
+    }
+
+    private Button createButton(Card card) {
+        Button button = new Button();
+        button.setPrefWidth(66);
+        button.setPrefHeight(100);
+        button.setText(card.getValue());
+
+        createButtonStyle(button, card);
+
+        button.setOnAction(action -> {
+            if (game.getCurrentPlayer().getType().equals(HUMAN)) {
+                gameService.playCard(card);
+                skipTurnButton.setVisible(false);
+                drawCardButton.setDisable(false);
+            }
+        });
+        return button;
+    }
+
+    private void createButtonStyle(Button button, Card card) {
+        switch (card.getColor()) {
+            case RED -> {
+                button.setTextFill(Paint.valueOf(DISPLAY_BLACK));
+                button.setStyle(BACKGROUND_RADIUS + RADIUS + "; "
+                        + BORDER_RADIUS + RADIUS + "; "
+                        + BACKGROUND_COLOR + DISPLAY_RED + "; "
+                        + BORDER_COLOR + BLACK + "; "
+                        + FONT_SIZE + SIZE_SMALL + ";"
+                        + FONT_WEIGHT + BOLD);
+            }
+            case BLUE -> {
+                button.setTextFill(Paint.valueOf(DISPLAY_BLACK));
+                button.setStyle(BACKGROUND_RADIUS + RADIUS + "; "
+                        + BORDER_RADIUS + RADIUS + "; "
+                        + BACKGROUND_COLOR + DISPLAY_BLUE + ";"
+                        + BORDER_COLOR + BLACK + "; "
+                        + FONT_SIZE + SIZE_SMALL + ";"
+                        + FONT_WEIGHT + BOLD);
+            }
+            case YELLOW -> {
+                button.setTextFill(Paint.valueOf(DISPLAY_BLACK));
+                button.setStyle(BACKGROUND_RADIUS + RADIUS + "; "
+                        + BORDER_RADIUS + RADIUS + "; "
+                        + BACKGROUND_COLOR + DISPLAY_YELLOW + ";"
+                        + BORDER_COLOR + BLACK + "; "
+                        + FONT_SIZE + SIZE_SMALL + ";"
+                        + FONT_WEIGHT + BOLD);
+            }
+            case GREEN -> {
+                button.setTextFill(Paint.valueOf(DISPLAY_BLACK));
+                button.setStyle(BACKGROUND_RADIUS + RADIUS + "; "
+                        + BORDER_RADIUS + RADIUS + "; "
+                        + BACKGROUND_COLOR + DISPLAY_GREEN + ";"
+                        + BORDER_COLOR + BLACK + "; "
+                        + FONT_SIZE + SIZE_SMALL + ";"
+                        + FONT_WEIGHT + BOLD);
+            }
+            case BLACK -> {
+                button.setTextFill(Paint.valueOf(DISPLAY_WHITE));
+                button.setStyle(BACKGROUND_RADIUS + RADIUS + "; "
+                        + BORDER_RADIUS + RADIUS + "; "
+                        + BACKGROUND_COLOR + DISPLAY_BLACK + ";"
+                        + BORDER_COLOR + BLACK + "; "
+                        + FONT_SIZE + SIZE_SMALL + ";"
+                        + FONT_WEIGHT + BOLD);
+            }
+        }
+    }
+
+    private void createDiscardStyle(Pane discardColor, Label discardValue, Card card) {
         switch (card.getColor()) {
             case RED -> {
                 discardValue.setTextFill(Paint.valueOf(DISPLAY_BLACK));
@@ -441,11 +477,11 @@ public class IngameController implements Controller {
     @Override
     public void destroy() {
         game.listeners().removePropertyChangeListener(Game.PROPERTY_DISCARD_PILE, discardPileListener);
-        this.player.listeners().removePropertyChangeListener(Player.PROPERTY_CARDS, playerCardsListener);
+        player.listeners().removePropertyChangeListener(Player.PROPERTY_CARDS, playerCardsListener);
         game.listeners().removePropertyChangeListener(Game.PROPERTY_HAS_WON, hasWonListener);
         game.listeners().removePropertyChangeListener(Game.PROPERTY_CURRENT_PLAYER, currentPlayerListener);
-        for (Player bot : game.getPlayers()){
-            if (bot.getType().equals(BOT)){
+        for (Player bot : game.getPlayers()) {
+            if (bot.getType().equals(BOT)) {
                 bot.listeners().removePropertyChangeListener(Player.PROPERTY_CARDS, this.botCardListener);
             }
         }

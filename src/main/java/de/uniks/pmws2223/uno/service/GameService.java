@@ -20,9 +20,7 @@ public class GameService {
 
     public void playCard(Card card) {
 
-        if (card.getValue().equals(game.getDiscardPile().getValue())
-                || card.getColor().equals(game.getDiscardPile().getColor())
-                || card.getColor().equals(BLACK)) {
+        if (checkPlayable(card)) {
 
             game.setDiscardPile(card);
             card.getPlayer().withoutCards(card);
@@ -58,12 +56,20 @@ public class GameService {
         }
     }
 
+    public boolean checkPlayable(Card card) {
+        return card.getValue().equals(game.getDiscardPile().getValue())
+                || card.getColor().equals(game.getDiscardPile().getColor())
+                || card.getColor().equals(BLACK);
+    }
+
     public Card drawCard() {
         return randomService.createCard();
     }
 
-    public void drawCard(Player player) {
-        player.withCards(drawCard());
+    public Card drawCard(Player player) {
+        Card card = drawCard();
+        player.withCards(card);
+        return card;
     }
 
     public void nextPlayer() {
@@ -102,7 +108,7 @@ public class GameService {
 
     public void endTurn() {
         if (game.getCurrentPlayer().getType().equals(BOT)) {
-            final BotService botService = new BotService(randomService, game, game.getCurrentPlayer());
+            final BotService botService = new BotService(randomService, game);
             botService.playWithDelay();
         }
     }

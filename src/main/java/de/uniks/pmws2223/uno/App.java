@@ -52,7 +52,7 @@ public class App extends Application {
                 stage.setWidth(209);
                 stage.setHeight(248);
                 stage.centerOnScreen();
-            } else if (controller.getTitle().equals("UNO - How to play")){
+            } else if (controller.getTitle().equals("UNO - How to play")) {
                 stage.setWidth(802);
                 stage.setHeight(427);
                 stage.centerOnScreen();

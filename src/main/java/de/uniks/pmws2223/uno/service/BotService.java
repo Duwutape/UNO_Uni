@@ -8,8 +8,7 @@ import javafx.application.Platform;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import static de.uniks.pmws2223.uno.Constants.COLORS;
-import static de.uniks.pmws2223.uno.Constants.WILD;
+import static de.uniks.pmws2223.uno.Constants.*;
 
 public class BotService {
     private final Game game;
@@ -43,7 +42,7 @@ public class BotService {
         playCard();
         if (!playedCard) {
             Card card = gameService.drawCard(currentPlayer);
-            if(gameService.checkPlayable(card)){
+            if (gameService.checkPlayable(card)) {
                 gameService.playCard(card);
             } else {
                 gameService.nextPlayer();
@@ -57,7 +56,7 @@ public class BotService {
             if (gameService.checkPlayable(card)) {
                 gameService.playCard(card);
 
-                if (card.getValue().equals(WILD)) {
+                if (card.getColor().equals(BLACK)) {
                     int color = randomService.chooseColor();
                     game.setDiscardPile(new Card(WILD, COLORS.get(color)));
                     gameService.nextPlayer();

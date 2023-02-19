@@ -21,7 +21,6 @@ public class Constants {
     public static final String CLARKE = "Clark";
     public static final List<String> NAMES = List.of(RAVEN, STORM, CLARKE);
 
-
     // styles
     public static final String BACKGROUND_COLOR = "-fx-background-color: ";
     public static final String BACKGROUND_RADIUS = "-fx-background-radius: ";

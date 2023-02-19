@@ -9,7 +9,7 @@ import org.testfx.framework.junit.ApplicationTest;
 import java.util.Random;
 
 import static de.uniks.pmws2223.uno.Constants.*;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.util.NodeQueryUtils.hasText;
 

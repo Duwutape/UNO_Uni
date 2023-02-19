@@ -5,7 +5,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Pane;
 
 import java.io.IOException;
 
@@ -27,10 +26,9 @@ public class CardController implements Controller {
         Parent parent = FXMLLoader.load(Main.class.getResource("view/Card.fxml"));
 
         // lookup content
-        Pane cardPane = (Pane) parent.lookup("#cardPane");
         Label cardText = (Label) parent.lookup("#cardText");
 
-        //create content
+        //set text alignment
         cardText.setAlignment(Pos.CENTER);
 
         return parent;

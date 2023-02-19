@@ -18,13 +18,17 @@ public class RandomService {
     }
 
     public Card createCard() {
-        int value = random.nextInt(0, 14);
-        int color = random.nextInt(0, 4);
+        int value = chooseValue();
+        int color = chooseColor();
 
         if (value == 13) {
             return new Card(VALUES.get(value), BLACK);
         }
         return new Card(VALUES.get(value), COLORS.get(color));
+    }
+
+    public int chooseValue() {
+        return random.nextInt(0, 14);
     }
 
     public int chooseColor() {

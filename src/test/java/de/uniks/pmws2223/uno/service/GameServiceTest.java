@@ -3,7 +3,6 @@ package de.uniks.pmws2223.uno.service;
 import de.uniks.pmws2223.uno.model.Card;
 import de.uniks.pmws2223.uno.model.Game;
 import de.uniks.pmws2223.uno.model.Player;
-import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.List;

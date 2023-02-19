@@ -2,7 +2,6 @@ package de.uniks.pmws2223.uno.service;
 
 import de.uniks.pmws2223.uno.model.Game;
 import de.uniks.pmws2223.uno.model.Player;
-import org.junit.Assert;
 import org.junit.Test;
 import org.testfx.framework.junit.ApplicationTest;
 
@@ -28,11 +27,6 @@ public class BotServiceTest extends ApplicationTest {
 
         GameService gameService = new GameService(randomService, game);
 
-        /*for (int i = 0; i <=100; i++){
-            System.out.println(random.nextInt(0,14));
-            System.out.println(random.nextInt(0,4));
-        }*/
-
         game.setDirection(CLOCKWISE).setDiscardPile(gameService.drawCard())
                 .withPlayers(player, bot1, bot2, bot3).setCurrentPlayer(player);
 
@@ -46,8 +40,7 @@ public class BotServiceTest extends ApplicationTest {
            Cards of player: [skip, red], [6, green], [nine, green]
            Cards of bot1: [7, blue], [5, green], [5, blue]
            Cards of bot2: [reverse, red], [reverse, blue], [8, red]
-           Cards of bot3: [0, yellow], [8, red], [8, red]
-           */
+           Cards of bot3: [0, yellow], [8, red], [8, red] */
         assertEquals(EIGHT, game.getDiscardPile().getValue());
         assertEquals(RED, game.getDiscardPile().getColor());
         assertEquals(SKIP, player.getCards().get(0).getValue());
@@ -82,8 +75,7 @@ public class BotServiceTest extends ApplicationTest {
            Cards of player: [6, green], [nine, green]
            Cards of bot1: [7, blue], [5, green], [5, blue]
            Cards of bot2: [reverse, red], [reverse, blue], [8, red]
-           Cards of bot3: [0, yellow], [8, red], [8, red]*/
-
+           Cards of bot3: [0, yellow], [8, red], [8, red] */
         gameService.playCard(player.getCards().get(0));
         assertEquals(2, player.getCards().size());
         assertEquals(3, bot1.getCards().size());
@@ -99,7 +91,7 @@ public class BotServiceTest extends ApplicationTest {
            Cards of player: [6, green], [nine, green]
            Cards of bot1: [7, blue], [5, green], [5, blue]
            Cards of bot2: [reverse, blue], [8, red]
-           Cards of bot3: [0, yellow], [8, red], [8, red]*/
+           Cards of bot3: [0, yellow], [8, red], [8, red] */
         sleep(2010);
         assertEquals(2, player.getCards().size());
         assertEquals(3, bot1.getCards().size());
@@ -116,7 +108,7 @@ public class BotServiceTest extends ApplicationTest {
            Cards of player: [6, green], [nine, green]
            Cards of bot1: [7, blue], [5, green], [5, blue]
            Cards of bot2: [reverse, blue], [8, red]
-           Cards of bot3: [0, yellow], [8, red], [8, red]*/
+           Cards of bot3: [0, yellow], [8, red], [8, red] */
         sleep(2010);
         assertEquals(2, player.getCards().size());
         assertEquals(4, bot1.getCards().size());

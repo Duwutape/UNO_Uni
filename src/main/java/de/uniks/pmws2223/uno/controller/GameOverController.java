@@ -48,7 +48,7 @@ public class GameOverController implements Controller {
             info.setVisible(false);
         } else {
             gameOver.setText("Game Over!");
-            info.setText(hasWon + " won");
+            info.setText(hasWon.getName() + " won");
         }
 
         // set button action

@@ -4,9 +4,9 @@ import de.uniks.pmws2223.uno.App;
 import de.uniks.pmws2223.uno.Main;
 import de.uniks.pmws2223.uno.model.Game;
 import de.uniks.pmws2223.uno.model.Player;
-import de.uniks.pmws2223.uno.service.RandomService;
 import de.uniks.pmws2223.uno.service.GameService;
 import de.uniks.pmws2223.uno.service.PlayerService;
+import de.uniks.pmws2223.uno.service.RandomService;
 import de.uniks.pmws2223.uno.service.SetupService;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -16,7 +16,7 @@ import javafx.scene.control.TextField;
 
 import java.io.IOException;
 
-import static de.uniks.pmws2223.uno.Constants.*;
+import static de.uniks.pmws2223.uno.Constants.HUMAN;
 
 public class SetupController implements Controller {
     private final App app;
@@ -54,7 +54,7 @@ public class SetupController implements Controller {
         Button startButton = (Button) parent.lookup("#startButton");
 
         // set action of buttons
-        tutorialButton.setOnAction(action ->{
+        tutorialButton.setOnAction(action -> {
             app.show(new HowToPlayController(app));
         });
 

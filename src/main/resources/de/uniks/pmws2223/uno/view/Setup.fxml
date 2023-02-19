@@ -37,6 +37,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
@@ -44,34 +45,35 @@
 
 <VBox xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
   <children>
-    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" VBox.vgrow="ALWAYS">
          <children>
-            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-            <Label layoutY="155.0" text="Name">
+            <Label layoutY="116.0" text="Name">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label layoutY="190.0" text="Bots">
+            <Label layoutY="151.0" text="Bots">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <TextField fx:id="nameField" layoutX="50.0" layoutY="155.0" promptText="Enter Name" />
-            <Button fx:id="startButton" defaultButton="true" layoutX="49.0" layoutY="284.0" mnemonicParsing="false" prefWidth="102.0" text="Start Game">
+            <TextField fx:id="nameField" layoutX="50.0" layoutY="116.0" promptText="Enter Name" />
+            <Button fx:id="startButton" defaultButton="true" layoutX="49.0" layoutY="245.0" mnemonicParsing="false" prefWidth="102.0" text="Start Game">
                <font>
                   <Font size="16.0" />
                </font>
             </Button>
-            <Slider fx:id="botSelector" layoutX="49.0" layoutY="196.0" majorTickUnit="1.0" max="3.0" min="1.0" minorTickCount="0" prefWidth="149.0" snapToTicks="true" value="1.0" />
-            <Label layoutX="53.0" layoutY="210.0" text="1" />
-            <Label layoutX="188.0" layoutY="210.0" text="3" />
-            <Label layoutX="120.0" layoutY="210.0" text="2" />
-            <Button fx:id="tutorialButton" layoutX="49.0" layoutY="237.0" mnemonicParsing="false" prefWidth="102.0" text="How to play">
+            <Slider fx:id="botSelector" layoutX="49.0" layoutY="157.0" majorTickUnit="1.0" max="3.0" min="1.0" minorTickCount="0" prefWidth="149.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="1.0" />
+            <Button fx:id="tutorialButton" layoutX="49.0" layoutY="198.0" mnemonicParsing="false" prefWidth="102.0" text="How to play">
                <font>
                   <Font size="13.0" />
                </font>
             </Button>
+            <ImageView fitHeight="100.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../uno_logo.png" />
+               </image>
+            </ImageView>
          </children>
          <VBox.margin>
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />

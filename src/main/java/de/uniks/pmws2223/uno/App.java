@@ -41,8 +41,8 @@ public class App extends Application {
         controller.init();
         try {
             if (controller.getTitle().equals("UNO - Setup")) {
-                stage.setWidth(270);
-                stage.setHeight(393);
+                stage.setWidth(265);
+                stage.setHeight(360);
                 stage.centerOnScreen();
             } else if (controller.getTitle().equals("UNO - Ingame")) {
                 stage.setWidth(990);

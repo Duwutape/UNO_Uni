@@ -15,6 +15,7 @@ import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
+import java.util.Objects;
 
 import static de.uniks.pmws2223.uno.Constants.HUMAN;
 
@@ -45,7 +46,7 @@ public class SetupController implements Controller {
     @Override
     public Parent render() throws IOException {
         // load fxml
-        Parent parent = FXMLLoader.load(Main.class.getResource("view/Setup.fxml"));
+        Parent parent = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("view/Setup.fxml")));
 
         // lookup content
         TextField nameField = (TextField) parent.lookup("#nameField");
@@ -54,9 +55,7 @@ public class SetupController implements Controller {
         Button startButton = (Button) parent.lookup("#startButton");
 
         // set action of buttons
-        tutorialButton.setOnAction(action -> {
-            app.show(new HowToPlayController(app));
-        });
+        tutorialButton.setOnAction(action -> app.show(new HowToPlayController(app)));
 
         startButton.setOnAction(action -> {
             final PlayerService playerService = new PlayerService();
@@ -66,7 +65,7 @@ public class SetupController implements Controller {
             Game game = setupService.createGame(randomService, player, (int) botSelector.getValue());
 
             final GameService gameService = new GameService(randomService, game);
-            app.show(new IngameController(app, gameService, randomService, game));
+            app.show(new IngameController(app, gameService, game));
         });
         return parent;
     }

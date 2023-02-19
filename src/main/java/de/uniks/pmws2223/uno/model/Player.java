@@ -6,7 +6,7 @@ import java.util.Collections;
 import java.util.Collection;
 import java.beans.PropertyChangeSupport;
 
-@SuppressWarnings({"unused", "UnusedReturnValue"})
+@SuppressWarnings({"UnusedReturnValue", "unused"})
 public class Player
 {
    public static final String PROPERTY_NAME = "name";

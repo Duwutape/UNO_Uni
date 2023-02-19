@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Label;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class CardController implements Controller {
 
@@ -23,7 +24,7 @@ public class CardController implements Controller {
     @Override
     public Parent render() throws IOException {
         // load fxml
-        Parent parent = FXMLLoader.load(Main.class.getResource("view/Card.fxml"));
+        Parent parent = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("view/Card.fxml")));
 
         // lookup content
         Label cardText = (Label) parent.lookup("#cardText");

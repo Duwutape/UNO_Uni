@@ -13,6 +13,7 @@ import static org.junit.Assert.assertEquals;
 import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.util.NodeQueryUtils.hasText;
 
+@SuppressWarnings("SpellCheckingInspection")
 public class GameTest extends ApplicationTest {
 
     private Stage stage;

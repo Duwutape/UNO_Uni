@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
 import java.io.IOException;
+import java.util.Objects;
 
 import static de.uniks.pmws2223.uno.Constants.HUMAN;
 
@@ -35,7 +36,7 @@ public class GameOverController implements Controller {
     @Override
     public Parent render() throws IOException {
         // load fxml
-        Parent parent = FXMLLoader.load(Main.class.getResource("view/GameOver.fxml"));
+        Parent parent = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("view/GameOver.fxml")));
 
         // lookup content
         Label gameOver = (Label) parent.lookup("#gameOverLabel");
@@ -52,9 +53,7 @@ public class GameOverController implements Controller {
         }
 
         // set button action
-        menuButton.setOnAction(action -> {
-            app.show(new SetupController(app));
-        });
+        menuButton.setOnAction(action -> app.show(new SetupController(app)));
 
         return parent;
     }

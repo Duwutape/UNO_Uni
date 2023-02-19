@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class HowToPlayController implements Controller {
 
@@ -31,21 +32,17 @@ public class HowToPlayController implements Controller {
     @Override
     public Parent render() throws IOException {
         // load fxml
-        Parent parent = FXMLLoader.load(Main.class.getResource("view/HowToPlay.fxml"));
+        Parent parent = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("view/HowToPlay.fxml")));
 
         // lookup content
         Button backButton = (Button) parent.lookup("#backButton");
         Hyperlink rules = (Hyperlink) parent.lookup("#rulesLink");
 
         //set button action
-        backButton.setOnAction(action -> {
-            app.show(new SetupController(app));
-        });
+        backButton.setOnAction(action -> app.show(new SetupController(app)));
 
         //set link action
-        rules.setOnAction(event -> {
-            app.getHostServices().showDocument(rules.getText());
-        });
+        rules.setOnAction(event -> app.getHostServices().showDocument(rules.getText()));
 
         return parent;
     }

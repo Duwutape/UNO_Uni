@@ -1,35 +1,31 @@
 package de.uniks.pmws2223.uno.model;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Collections;
-import java.util.Collection;
+
 import java.beans.PropertyChangeSupport;
+import java.util.Objects;
 
-@SuppressWarnings({"unused", "UnusedReturnValue", "ConstantValue"})
-public class Card
-{
-   public static final String PROPERTY_VALUE = "value";
-   public static final String PROPERTY_COLOR = "color";
-   public static final String PROPERTY_GAME = "game";
-   public static final String PROPERTY_PLAYER = "player";
-   private String value;
-   private String color;
-   protected PropertyChangeSupport listeners;
-   private Game game;
-   private Player player;
+@SuppressWarnings({"UnusedReturnValue", "unused"})
+public class Card {
+    public static final String PROPERTY_VALUE = "value";
+    public static final String PROPERTY_COLOR = "color";
+    public static final String PROPERTY_GAME = "game";
+    public static final String PROPERTY_PLAYER = "player";
+    private String value;
+    private String color;
+    protected PropertyChangeSupport listeners;
+    private Game game;
+    private Player player;
 
-   public Card(String value, String color) {
-      this.value = value;
-      this.color = color;
-   }
+    public Card(String value, String color) {
+        this.value = value;
+        this.color = color;
+    }
 
-   public String getValue()
+    public String getValue()
    {
       return this.value;
    }
 
-   public Card setValue(String value)
+    public Card setValue(String value)
    {
       if (Objects.equals(value, this.value))
       {
@@ -42,12 +38,12 @@ public class Card
       return this;
    }
 
-   public String getColor()
+    public String getColor()
    {
       return this.color;
    }
 
-   public Card setColor(String value)
+    public Card setColor(String value)
    {
       if (Objects.equals(value, this.color))
       {
@@ -60,12 +56,12 @@ public class Card
       return this;
    }
 
-   public Game getGame()
+    public Game getGame()
    {
       return this.game;
    }
 
-   public Card setGame(Game value)
+    public Card setGame(Game value)
    {
       if (this.game == value)
       {
@@ -87,12 +83,12 @@ public class Card
       return this;
    }
 
-   public Player getPlayer()
+    public Player getPlayer()
    {
       return this.player;
    }
 
-   public Card setPlayer(Player value)
+    public Card setPlayer(Player value)
    {
       if (this.player == value)
       {
@@ -114,7 +110,7 @@ public class Card
       return this;
    }
 
-   public boolean firePropertyChange(String propertyName, Object oldValue, Object newValue)
+    public boolean firePropertyChange(String propertyName, Object oldValue, Object newValue)
    {
       if (this.listeners != null)
       {
@@ -124,7 +120,7 @@ public class Card
       return false;
    }
 
-   public PropertyChangeSupport listeners()
+    public PropertyChangeSupport listeners()
    {
       if (this.listeners == null)
       {
@@ -133,7 +129,7 @@ public class Card
       return this.listeners;
    }
 
-   @Override
+    @Override
    public String toString()
    {
       final StringBuilder result = new StringBuilder();
@@ -142,7 +138,7 @@ public class Card
       return result.substring(1);
    }
 
-   public void removeYou()
+    public void removeYou()
    {
       this.setGame(null);
       this.setPlayer(null);

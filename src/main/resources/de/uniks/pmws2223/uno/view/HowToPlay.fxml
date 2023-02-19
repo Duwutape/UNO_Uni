@@ -32,8 +32,8 @@
                </font>
             </Label>
             <Label layoutY="197.0" text="When it is your turn click on a card in your deck to play it. If you do not have a playable card draw a card by clicking on the Draw Pile." />
-            <Label layoutY="211.0" text="After you draw a card you have to play it if possible. If it is not possible the next player is in turn" />
-            <Label layoutY="225.0" text="You also can draw a card if you have a playable card on hand." />
+            <Label layoutY="211.0" text="After you draw a card you have to play it if possible. If it is not possible, it is the turn of the next player." />
+            <Label layoutY="225.0" text="You can also draw a card if you have a playable card on hand." />
             <Label layoutY="239.0" text="If you have to draw two cards the game automatically gives you them." />
             <Label layoutY="253.0" text="After playing a wild card buttons to choose a color will appear. Click on the color with which the game should continue." />
             <Label layoutY="267.0" text="The leave button will bring you back to the menu. The process of the game will be lost." />

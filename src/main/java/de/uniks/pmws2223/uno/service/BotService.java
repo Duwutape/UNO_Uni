@@ -57,14 +57,22 @@ public class BotService {
                 gameService.playCard(card);
 
                 if (card.getColor().equals(BLACK)) {
-                    int color = randomService.chooseColor();
-                    game.setDiscardPile(new Card(WILD, COLORS.get(color)));
+                    changeColor();
+
                     gameService.nextPlayer();
                     gameService.endTurn();
                 }
                 playedCard = true;
                 break;
             }
+        }
+    }
+
+    private void changeColor() {
+        int color = randomService.chooseColor();
+        game.setDiscardPile(new Card(WILD, COLORS.get(color)));
+        if(game.getDiscardPile().getColor().equals(BLACK)){
+            changeColor();
         }
     }
 }

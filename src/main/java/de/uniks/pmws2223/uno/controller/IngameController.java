@@ -6,7 +6,6 @@ import de.uniks.pmws2223.uno.model.Card;
 import de.uniks.pmws2223.uno.model.Game;
 import de.uniks.pmws2223.uno.model.Player;
 import de.uniks.pmws2223.uno.service.GameService;
-import de.uniks.pmws2223.uno.service.RandomService;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
@@ -21,12 +20,13 @@ import java.beans.PropertyChangeListener;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import static de.uniks.pmws2223.uno.Constants.*;
 
+@SuppressWarnings({"FieldCanBeLocal", "SpellCheckingInspection"})
 public class IngameController implements Controller {
     private final GameService gameService;
-    private final RandomService randomService;
     private final App app;
     private final Game game;
     private Player player;
@@ -49,10 +49,9 @@ public class IngameController implements Controller {
     private PropertyChangeListener currentPlayerListener;
     private PropertyChangeListener botCardListener;
 
-    public IngameController(App app, GameService gameService, RandomService randomService, Game game) {
+    public IngameController(App app, GameService gameService, Game game) {
         this.app = app;
         this.gameService = gameService;
-        this.randomService = randomService;
         this.game = game;
         for (Player player : game.getPlayers()) {
             if (player.getType().equals(HUMAN)) {
@@ -74,7 +73,7 @@ public class IngameController implements Controller {
     @Override
     public Parent render() throws IOException {
         // load fxml
-        Parent parent = FXMLLoader.load(Main.class.getResource("view/Ingame.fxml"));
+        Parent parent = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("view/Ingame.fxml")));
 
         // lookup content
         bot0Box = (HBox) parent.lookup("#bot0Box");
@@ -131,9 +130,7 @@ public class IngameController implements Controller {
         renderPlayerCards(playerCardBox);
 
         // set listener for player cards
-        playerCardsListener = event -> {
-            renderPlayerCards(playerCardBox);
-        };
+        playerCardsListener = event -> renderPlayerCards(playerCardBox);
         player.listeners().addPropertyChangeListener(Player.PROPERTY_CARDS, playerCardsListener);
 
         // set discard Pile
@@ -215,9 +212,7 @@ public class IngameController implements Controller {
         });
 
         // set leave button action
-        leaveButton.setOnAction(action -> {
-            app.show(new SetupController(app));
-        });
+        leaveButton.setOnAction(action -> app.show(new SetupController(app)));
 
         // set listener for game over
         hasWonListener = event -> {
@@ -476,6 +471,7 @@ public class IngameController implements Controller {
 
     @Override
     public void destroy() {
+        subControllers.forEach(Controller::destroy);
         game.listeners().removePropertyChangeListener(Game.PROPERTY_DISCARD_PILE, discardPileListener);
         player.listeners().removePropertyChangeListener(Player.PROPERTY_CARDS, playerCardsListener);
         game.listeners().removePropertyChangeListener(Game.PROPERTY_HAS_WON, hasWonListener);

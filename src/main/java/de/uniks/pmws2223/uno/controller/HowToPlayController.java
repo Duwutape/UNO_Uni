@@ -1,10 +1,12 @@
 package de.uniks.pmws2223.uno.controller;
 
-import com.sun.tools.javac.Main;
+
 import de.uniks.pmws2223.uno.App;
+import de.uniks.pmws2223.uno.Main;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
 
 import java.io.IOException;
 
@@ -33,10 +35,16 @@ public class HowToPlayController implements Controller {
 
         // lookup content
         Button backButton = (Button) parent.lookup("#backButton");
+        Hyperlink rules = (Hyperlink) parent.lookup("#rulesLink");
 
         //set button action
         backButton.setOnAction(action -> {
             app.show(new SetupController(app));
+        });
+
+        //set link action
+        rules.setOnAction(event -> {
+            app.getHostServices().showDocument(rules.getText());
         });
 
         return parent;

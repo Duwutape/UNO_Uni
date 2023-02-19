@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
@@ -31,8 +32,8 @@
                </font>
             </Label>
             <Label layoutY="197.0" text="When it is your turn click on a card in your deck to play it. If you do not have a playable card draw a card by clicking on the Draw Pile." />
-            <Label layoutY="211.0" text="After you draw a card you can play it when possible. If not it is not possible or you want to keep the card you have to click the" />
-            <Label layoutY="225.0" text="Skip turn button which will appear after drawing a card." />
+            <Label layoutY="211.0" text="After you draw a card you have to play it if possible. If it is not possible the next player is in turn" />
+            <Label layoutY="225.0" text="You also can draw a card if you have a playable card on hand." />
             <Label layoutY="239.0" text="If you have to draw two cards the game automatically gives you them." />
             <Label layoutY="253.0" text="After playing a wild card buttons to choose a color will appear. Click on the color with which the game should continue." />
             <Label layoutY="267.0" text="The leave button will bring you back to the menu. The process of the game will be lost." />
@@ -41,11 +42,12 @@
                   <Font size="11.0" />
                </font>
             </Label>
-            <Label layoutY="351.0" text="at Universtyof Kassel in winter term 22/23">
+            <Label layoutY="351.0" text="at University of Kassel in winter term 22/23">
                <font>
                   <Font size="11.0" />
                </font>
             </Label>
+            <Hyperlink fx:id="rulesLink" layoutX="447.0" layoutY="34.0" text="https://www.unorules.com/" />
          </children>
          <VBox.margin>
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />

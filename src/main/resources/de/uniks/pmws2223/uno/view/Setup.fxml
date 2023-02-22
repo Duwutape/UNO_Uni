@@ -43,16 +43,16 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<VBox style="-fx-background-color: #808080;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" VBox.vgrow="ALWAYS">
          <children>
-            <Label layoutY="116.0" text="Name">
+            <Label layoutY="116.0" style="-fx-text-fill: #090909;" text="Name">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label layoutY="151.0" text="Bots">
+            <Label layoutY="151.0" style="-fx-text-fill: #090909;" text="Bots">
                <font>
                   <Font size="16.0" />
                </font>
@@ -63,7 +63,7 @@
                   <Font size="16.0" />
                </font>
             </Button>
-            <Slider fx:id="botSelector" layoutX="49.0" layoutY="157.0" majorTickUnit="1.0" max="3.0" min="1.0" minorTickCount="0" prefWidth="149.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="1.0" />
+            <Slider fx:id="botSelector" layoutX="49.0" layoutY="157.0" majorTickUnit="1.0" max="3.0" min="1.0" minorTickCount="0" prefWidth="149.0" showTickMarks="true" snapToTicks="true" value="1.0" />
             <Button fx:id="tutorialButton" layoutX="49.0" layoutY="198.0" mnemonicParsing="false" prefWidth="102.0" text="How to play">
                <font>
                   <Font size="13.0" />
@@ -74,6 +74,21 @@
                   <Image url="@../../../../../uno_logo.png" />
                </image>
             </ImageView>
+            <Label layoutX="53.0" layoutY="177.0" style="-fx-text-fill: #090909;" text="1">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+            <Label layoutX="121.0" layoutY="177.0" style="-fx-text-fill: #090909;" text="2">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+            <Label layoutX="188.0" layoutY="177.0" style="-fx-text-fill: #090909;" text="3">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
          </children>
          <VBox.margin>
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />

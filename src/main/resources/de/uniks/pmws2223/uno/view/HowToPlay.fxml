@@ -8,46 +8,46 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<VBox style="-fx-background-color: #808080;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
          <children>
             <Button fx:id="backButton" cancelButton="true" layoutX="653.0" mnemonicParsing="false" text="Back to menu" />
-            <Label text="Rules:" underline="true">
+            <Label style="-fx-text-fill: #090909;" text="Rules:" underline="true">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <Label layoutY="37.0" text="The game is played according to the official basic uno rules. You can read them here:" />
-            <Label layoutY="59.0" text="There are some exceptions:" />
-            <Label layoutX="150.0" layoutY="59.0" text="- The human player will start every game" />
-            <Label layoutX="150.0" layoutY="73.0" text="- There is no wild draw four card in game" />
-            <Label layoutX="150.0" layoutY="87.0" text="- Action cards can be played on top of each other but the action is not stackable" />
-            <Label layoutX="150.0" layoutY="101.0" text="- You can play a wild card on a wild card" />
-            <Label layoutX="150.0" layoutY="115.0" text="- If the first card of a game is a action card, the action will not be performed" />
-            <Label layoutX="150.0" layoutY="128.0" text="- If the first card of a game is a wild card a random color will be picked" />
-            <Label layoutY="160.0" text="How to play:" underline="true">
+            <Label layoutY="37.0" style="-fx-text-fill: #090909;" text="The game is played according to the official basic uno rules. You can read them here:" />
+            <Label layoutY="59.0" style="-fx-text-fill: #090909;" text="There are some exceptions:" />
+            <Label layoutX="150.0" layoutY="59.0" style="-fx-text-fill: #090909;" text="- The human player will start every game" />
+            <Label layoutX="150.0" layoutY="73.0" style="-fx-text-fill: #090909;" text="- There is no wild draw four card in game" />
+            <Label layoutX="150.0" layoutY="87.0" style="-fx-text-fill: #090909;" text="- Action cards can be played on top of each other but the action is not stackable" />
+            <Label layoutX="150.0" layoutY="101.0" style="-fx-text-fill: #090909;" text="- You can play a wild card on a wild card" />
+            <Label layoutX="150.0" layoutY="115.0" style="-fx-text-fill: #090909;" text="- If the first card of a game is a action card, the action will not be performed" />
+            <Label layoutX="150.0" layoutY="128.0" style="-fx-text-fill: #090909;" text="- If the first card of a game is a wild card a random color will be picked" />
+            <Label layoutY="160.0" style="-fx-text-fill: #090909;" text="How to play:" underline="true">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <Label layoutY="197.0" text="When it is your turn click on a card in your deck to play it. If you do not have a playable card draw a card by clicking on the Draw Pile." />
-            <Label layoutY="211.0" text="After you draw a card you have to play it if possible. If it is not possible, it is the turn of the next player." />
-            <Label layoutY="225.0" text="You can also draw a card if you have a playable card on hand." />
-            <Label layoutY="239.0" text="If you have to draw two cards the game automatically gives you them." />
-            <Label layoutY="253.0" text="After playing a wild card buttons to choose a color will appear. Click on the color with which the game should continue." />
-            <Label layoutY="267.0" text="The leave button will bring you back to the menu. The process of the game will be lost." />
-            <Label layoutY="338.0" text="This program was created by Daniel Langheld in the context of the &quot;Programmierung und Modelierung&quot; lecture">
+            <Label layoutY="197.0" style="-fx-text-fill: #090909;" text="When it is your turn click on a card in your deck to play it. If you do not have a playable card draw a card by clicking on the Draw Pile." />
+            <Label layoutY="211.0" style="-fx-text-fill: #090909;" text="After you draw a card you have to play it if possible. If it is not possible, it is the turn of the next player." />
+            <Label layoutY="225.0" style="-fx-text-fill: #090909;" text="You can also draw a card if you have a playable card on hand." />
+            <Label layoutY="239.0" style="-fx-text-fill: #090909;" text="If you have to draw two cards the game automatically gives you them." />
+            <Label layoutY="253.0" style="-fx-text-fill: #090909;" text="After playing a wild card buttons to choose a color will appear. Click on the color with which the game should continue." />
+            <Label layoutY="267.0" style="-fx-text-fill: #090909;" text="The leave button will bring you back to the menu. The process of the game will be lost." />
+            <Label layoutY="338.0" style="-fx-text-fill: #090909;" text="This program was created by Daniel Langheld in the context of the &quot;Programmierung und Modelierung&quot; lecture">
                <font>
                   <Font size="11.0" />
                </font>
             </Label>
-            <Label layoutY="351.0" text="at University of Kassel in winter term 22/23">
+            <Label layoutY="351.0" style="-fx-text-fill: #090909;" text="at University of Kassel in winter term 22/23">
                <font>
                   <Font size="11.0" />
                </font>
             </Label>
-            <Hyperlink fx:id="rulesLink" layoutX="447.0" layoutY="34.0" text="https://www.unorules.com/" />
+            <Hyperlink fx:id="rulesLink" layoutX="447.0" layoutY="34.0" style="-fx-text-fill: #1774e1;" text="https://www.unorules.com/" />
          </children>
          <VBox.margin>
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />

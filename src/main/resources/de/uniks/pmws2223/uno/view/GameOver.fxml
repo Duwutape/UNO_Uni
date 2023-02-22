@@ -39,16 +39,16 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<VBox style="-fx-background-color: #808080;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="168.0" prefWidth="139.0" VBox.vgrow="ALWAYS">
          <children>
-            <Label fx:id="gameOverLabel" layoutX="10.0" layoutY="39.0" text="Game Over">
+            <Label fx:id="gameOverLabel" layoutX="10.0" layoutY="39.0" style="-fx-text-fill: #090909;" text="Game Over">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
-            <Label fx:id="infoLabel" layoutX="44.0" layoutY="76.0" text="BotX won" />
+            <Label fx:id="infoLabel" layoutX="44.0" layoutY="76.0" style="-fx-text-fill: #090909;" text="BotX won" />
             <Button fx:id="menuButton" layoutX="25.0" layoutY="116.0" mnemonicParsing="false" text="Back to Menu" />
          </children>
          <VBox.margin>

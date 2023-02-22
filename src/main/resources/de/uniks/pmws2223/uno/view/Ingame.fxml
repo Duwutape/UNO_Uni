@@ -70,7 +70,6 @@
             <Button fx:id="chooseColorBlue" layoutX="460.0" layoutY="459.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: #4e2efa; -fx-border-color: black; -fx-border-radius: 10; -fx-background-radius: 10;" />
             <Button fx:id="chooseColorYellow" layoutX="410.0" layoutY="509.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: edf004; -fx-border-color: black; -fx-border-radius: 10; -fx-background-radius: 10;" />
             <Button fx:id="chooseColorGreen" layoutX="460.0" layoutY="509.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: #76ff00; -fx-border-color: black; -fx-border-radius: 10; -fx-background-radius: 10;" />
-            <Button fx:id="skipTurnButton" layoutX="428.0" layoutY="570.0" mnemonicParsing="false" text="Skip turn" />
             <Label layoutX="420.0" layoutY="343.0" text="IN TURN:">
                <font>
                   <Font name="System Bold" size="18.0" />

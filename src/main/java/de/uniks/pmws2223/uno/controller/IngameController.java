@@ -44,7 +44,6 @@ public class IngameController implements Controller {
     private Button yellow;
     private Button green;
     private Button drawCardButton;
-    private Button skipTurnButton;
     private PropertyChangeListener hasWonListener;
     private PropertyChangeListener currentPlayerListener;
     private PropertyChangeListener botCardListener;
@@ -91,7 +90,6 @@ public class IngameController implements Controller {
         Pane discardColor = (Pane) parent.lookup("#discardColorPane");
         Label discardValue = (Label) parent.lookup("#discardValueLabel");
         drawCardButton = (Button) parent.lookup("#drawPileButton");
-        skipTurnButton = (Button) parent.lookup("#skipTurnButton");
         Button leaveButton = (Button) parent.lookup("#leaveButton");
         Label turn = (Label) parent.lookup("#turnLabel");
 
@@ -197,17 +195,6 @@ public class IngameController implements Controller {
                     disableButtons(playerCardBox, newCard);
                 }
 
-            }
-        });
-
-        // set skipTurnButton
-        skipTurnButton.setVisible(false);
-        skipTurnButton.setOnAction(action -> {
-            skipTurnButton.setVisible(false);
-            drawCardButton.setDisable(false);
-            if (game.getCurrentPlayer().getType().equals(HUMAN)) {
-                gameService.nextPlayer();
-                gameService.endTurn();
             }
         });
 
@@ -355,7 +342,6 @@ public class IngameController implements Controller {
         button.setOnAction(action -> {
             if (game.getCurrentPlayer().getType().equals(HUMAN)) {
                 gameService.playCard(card);
-                skipTurnButton.setVisible(false);
                 drawCardButton.setDisable(false);
             }
         });

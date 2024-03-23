@@ -56,7 +56,7 @@ public class BotService {
             if (gameService.checkPlayable(card)) {
                 gameService.playCard(card);
 
-                if (card.getValue().equals(WILD)) {
+                if (card.getColor().equals(BLACK)) {
                     changeColor();
 
                     gameService.nextPlayer();

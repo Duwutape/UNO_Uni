@@ -2,6 +2,7 @@ package de.uniks.pmws2223.uno.service;
 
 import de.uniks.pmws2223.uno.model.Card;
 
+import java.util.Objects;
 import java.util.Random;
 
 import static de.uniks.pmws2223.uno.Constants.*;
@@ -18,20 +19,19 @@ public class RandomService {
     }
 
     public Card createCard() {
-        int value = chooseValue();
-        int color = chooseColor();
+        String value = chooseValue();
 
-        if (value == 13) {
-            return new Card(VALUES.get(value), BLACK);
+        if (Objects.equals(value, WILD)) {
+            return new Card(value, BLACK);
         }
-        return new Card(VALUES.get(value), COLORS.get(color));
+        return new Card(value, chooseColor());
     }
 
-    public int chooseValue() {
-        return random.nextInt(0, 14);
+    public String chooseValue() {
+        return VALUES.get(random.nextInt(0, 14));
     }
 
-    public int chooseColor() {
-        return random.nextInt(0, 4);
+    public String chooseColor() {
+        return COLORS.get(random.nextInt(0, 4));
     }
 }

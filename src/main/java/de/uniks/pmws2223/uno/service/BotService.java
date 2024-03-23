@@ -69,8 +69,7 @@ public class BotService {
     }
 
     private void changeColor() {
-        int color = randomService.chooseColor();
-        game.setDiscardPile(new Card(WILD, COLORS.get(color)));
+        game.setDiscardPile(new Card(WILD, randomService.chooseColor()));
         if(game.getDiscardPile().getColor().equals(BLACK)){
             changeColor();
         }

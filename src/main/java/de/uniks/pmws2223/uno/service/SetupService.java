@@ -16,8 +16,7 @@ public class SetupService {
                 .setDirection(CLOCKWISE);
 
         if (game.getDiscardPile().getColor().equals(BLACK)) {
-            int color = randomService.chooseColor();
-            game.setDiscardPile(new Card(WILD, COLORS.get(color)));
+            game.setDiscardPile(new Card(WILD, randomService.chooseColor()));
         }
 
         for (int i = 0; i < numberBots; i++) {
